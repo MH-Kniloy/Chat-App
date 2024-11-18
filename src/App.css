@@ -1,0 +1,19 @@
+input:-webkit-autofill {
+  background-color: transparent !important; /* Customize as needed */
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important; /* Ensures background override */
+  -webkit-text-fill-color: #000 !important; /* Text color */
+  transition: background-color 5000s ease-in-out 0s; /* Prevent flickering */
+}
+
+.form-control input:focus + label span,
+.form-control input:valid + label span {
+  transform: translateY(-15px);
+  
+}
+
+.form-control:first-of-type label span:nth-child(5){
+   padding-right: 6px;
+}
+.form-control:nth-of-type(2) label span:nth-child(4){
+   padding-right: 6px;
+}
