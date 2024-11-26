@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Wavelabel = ({text}) => {
+const Wavelabel = ({text, classname}) => {
   return (
     <>
-      <label className="absolute top-[30px] md:left-[37px] left-4 px-4 text-xl opacity-50 text-darkBlueOne peer-focus:top-[0px] peer-valid:top-[0px]  peer-focus:text-[14px] peer-valid:text-[14px] peer-focus:font-semibold peer-valid:font-semibold peer-focus:tracking-[1px] peer-valid:tracking-[1px] peer-focus:opacity-100 peer-valid:opacity-100 peer-focus:text-opacity-70 peer-valid:text-opacity-70 bg-white transition-all duration-300">
+      <label className={`${classname}`}>
         {text.split("").map((letter, index) => (
           <span
             key={index}

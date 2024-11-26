@@ -10,10 +10,22 @@ input:-webkit-autofill {
   transform: translateY(-15px);
   
 }
+.form-control-two input:focus + label span,
+.form-control-two input:valid + label span {
+  transform: translateY(-15px);
+  
+}
 
 .form-control:first-of-type label span:nth-child(5){
    padding-right: 6px;
 }
 .form-control:nth-of-type(2) label span:nth-child(4){
+   padding-right: 6px;
+}
+.form-control:last-of-type label span:nth-child(7){
+   padding-right: 6px;
+}
+
+.form-control-two:nth-of-type(2) label span:nth-child(5){
    padding-right: 6px;
 }
