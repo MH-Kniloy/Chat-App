@@ -6,6 +6,7 @@ import { FaFaceDizzy } from "react-icons/fa6";
 import { FaFaceFlushed } from "react-icons/fa6";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
+import { Link } from 'react-router-dom';
 
 const Registration = () => {
 
@@ -42,6 +43,8 @@ const Registration = () => {
   const [greenThree, setGreenThree] = useState(false)
   const [greenFour, setGreenFour] = useState(false)
   const [greenFive, setGreenFive] = useState(false)
+
+
 
   
   const handlePassword = (e)=>{
@@ -258,12 +261,12 @@ const handleSubmit = ()=>{
           </form>
           <p className="text-darkBlueTwo font-opnesans text-[14px] text-center w-[350px] mb-12 md:mb-0">
             Already have an account ?{" "}
-            <a
+            <Link
               className="text-orange font-opnesans text-[14px] font-bold"
-              href="#"
+              to="/Login"
             >
               Sign In
-            </a>
+            </Link>
           </p>
         </div>
 
