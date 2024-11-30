@@ -45,8 +45,6 @@ const Registration = () => {
   const [greenFive, setGreenFive] = useState(false)
 
 
-
-  
   const handlePassword = (e)=>{
     const value = e.target.value
     setPassword(value)

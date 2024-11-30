@@ -36,7 +36,7 @@ const Login = () => {
               <Wavelabel classname={"absolute top-[30px] md:left-[0px] left-4 text-xl opacity-50 text-darkBlueOne peer-focus:top-[0px] peer-valid:top-[0px]  peer-focus:text-[14px] peer-valid:text-[14px] peer-focus:font-semibold peer-valid:font-semibold peer-focus:tracking-[1px] peer-valid:tracking-[1px] peer-focus:opacity-100 peer-valid:opacity-100 peer-focus:text-opacity-70 peer-valid:text-opacity-70  transition-all duration-300"} text={"Password"}></Wavelabel>
             </div>
             <p className='py-[26px] w-full md:w-auto md:px-[122px] text-center bg-violet text-xl font-opnesans font-semibold text-white rounded-[9px] inline-block cursor-pointer active:scale-[0.98] mb-10'>Login to Continue</p>
-            <p className='text-darkBlueTwo text-[14px] font-opnesans'>Don’t have an account ? <Link className='text-orange font-bold cursor-pointer' to ="/" >Sign up</Link> </p>
+            <p className='text-darkBlueTwo text-[14px] font-opnesans'>Don’t have an account ? <Link className='text-orange font-bold cursor-pointer' to ="/Registration" >Sign up</Link> </p>
       </div>
 
 
