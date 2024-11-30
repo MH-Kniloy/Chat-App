@@ -6,9 +6,13 @@ import { FaFaceDizzy } from "react-icons/fa6";
 import { FaFaceFlushed } from "react-icons/fa6";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const Registration = () => {
+  
+  const auth = getAuth();
+  const navigate = useNavigate()
 
   // for email validation
   const [email, setEmail] = useState("")
@@ -108,7 +112,7 @@ const Registration = () => {
   const handleShowConfirmPass = ()=>{
     setShowConfirmPassword(!showConfirmPassword)
   }
-
+  
 const handleSubmit = ()=>{
   // Condition for email 
     if(!email){
@@ -156,8 +160,24 @@ const handleSubmit = ()=>{
 
     }
     // if password matches confirm password and all error clears then sign up btn submits 
-    if(confirmPassword===password && !emailErr && !fullNameErr && !uppercaseErr && email && password && confirmPassword){
-      alert("success")
+    if(confirmPassword===password && !emailErr && !fullNameErr && email && password && confirmPassword){
+        
+        createUserWithEmailAndPassword(auth, email, password)
+          .then(() => {
+            console.log('registration successful');
+            navigate("/Login")
+            
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            
+            if(errorCode.includes("auth/email-already-in-use")){
+              setEmailErr("This email already in use, try again with another email")
+            }
+            
+            // ..
+          });
+
         setEmail("")
         setFullName("")
         setPassword("")
