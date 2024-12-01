@@ -6,7 +6,11 @@ import { FaFaceFlushed } from "react-icons/fa6";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CircleLoader } from "react-spinners";
@@ -167,6 +171,12 @@ const Registration = () => {
     ) {
       createUserWithEmailAndPassword(auth, email, password)
         .then(() => {
+          sendEmailVerification(auth.currentUser).then(() => {
+            // Email verification sent!
+            // ...
+
+            toast.success("Verification Email Sent");
+          });
           setLoading(true)
           toast.success("Registration Successful");
 
@@ -185,6 +195,7 @@ const Registration = () => {
 
           // ..
         });
+        
 
       setEmail("");
       setFullName("");
