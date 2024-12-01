@@ -88,11 +88,8 @@ const Login = () => {
           const errorCode = error.code;
           if (errorCode.includes("auth/invalid-credential")) {
             setEmailErr("Enter a registered email or sign up");
-            console.log(errorCode);
-            
-            
-          }else if(errorCode.includes("auth/wrong-password")){
             setPasswordErr("Wrong password");
+            
           }
         });
     }
