@@ -383,21 +383,21 @@ const Registration = () => {
               onClick={handleSubmit}
               className="py-5 md:px-[145px] md:mt-0 mt-8 w-full md:w-auto text-center inline-block bg-violet text-white font-nunito text-xl font-semibold rounded-[86px] cursor-pointer active:scale-[0.98] relative"
             >
-              Sign up
-              <span className="absolute top-[20px] right-[90px]">
-                {loading ? <CircleLoader
-                  className="mx-auto"
-                  color="#fff"
-                  cssOverride={{}}
-                  loading
-                  size={30}
-                  speedMultiplier={1}
-                />
-                :
-                ""
-              }
-                
-              </span>
+              
+              
+                {loading ? (
+                  <CircleLoader
+                    className="mx-auto"
+                    color="#fff"
+                    cssOverride={{}}
+                    loading
+                    size={30}
+                    speedMultiplier={1}
+                  />
+                ) : (
+                  "Sign up"
+                )}
+              
             </p>
           </form>
           <p className="text-darkBlueTwo font-opnesans text-[14px] text-center w-[350px] mb-12 md:mb-0">

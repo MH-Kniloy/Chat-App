@@ -9,6 +9,7 @@ import {
 import Registration from "./components/Registration/Registration";
 import Login from "./components/Login/Login"
 import firebaseConfig from "./components/Authentication/Firebase.config";
+import Home from "./components/Home/Home";
 
 function App() {
   
@@ -17,6 +18,7 @@ const router = createBrowserRouter(
     <Route>
       <Route path="/Registration" element={<Registration />} />
       <Route path="/Login" element={<Login />} />
+      <Route path="/Home" element={<Home />} />
       <Route path="*" element={<Navigate to="/Registration" replace />} />
     </Route>
   )

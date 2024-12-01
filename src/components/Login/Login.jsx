@@ -2,10 +2,14 @@ import React, { useState } from 'react'
 import Loginimg from '../../assets/login.png'
 import Google from '../../assets/google.png'
 import Wavelabel from '../Wavelabel/Wavelabel'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaFaceDizzy } from "react-icons/fa6";
 import { FaFaceFlushed } from "react-icons/fa6";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { PacmanLoader } from "react-spinners";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import Home from '../Home/Home';
 
 const Login = () => {
 
@@ -16,6 +20,10 @@ const Login = () => {
   const [passwordErr, setPasswordErr] = useState("");
 
    const [showPassword, setShowPassword] = useState(false);
+
+   const [spinner, setSpinner]=useState(true)
+
+   const navigate = useNavigate()
 
    const handleShowPass = () => {
      setShowPassword(!showPassword);
@@ -44,12 +52,67 @@ const Login = () => {
          if(!password){
           setPasswordErr("Enter a password")
          }
+         if(email && password){
+
+          const auth = getAuth();
+          signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+
+              
+                  setEmailErr("")
+                  setPasswordErr("")
+              // Signed in
+              const user = userCredential.user;
+
+              
+              if(user.emailVerified === false){
+                toast.error("Verify your email address")
+              }else{
+                  toast.success("Login Successful");
+
+                  setTimeout(() => {
+                    navigate("/Home");
+                  }, 4000);
+
+                  setSpinner(true);
+              }
+              
+              // ...
+            })
+            .catch((error) => {
+              const errorCode = error.code;
+              if(errorCode.includes("auth/invalid-credential")){
+                setEmailErr("Enter a registered email or sign up")
+                setPasswordErr("Wrong password")
+              }
+              
+              
+            });
+
+
+          
+         }
+
+
   }
  
 
   return (
     <>
       <section className="md:flex">
+        <ToastContainer
+          position="top-center"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+          transition:Flip
+        />
         <div className="md:w-[60%] md:pt-[220px] pt-8 md:ps-[260px] ps-4 pe-4 md:pe-0 mb-12 md:mb-0">
           <h2 className="text-darkBlueTwo font-opnesans font-bold md:text-[34px] text-3xl mb-8">
             Login to your account!
@@ -115,7 +178,7 @@ const Login = () => {
             onClick={handleSubmit}
             className="py-[26px] w-full md:w-auto md:px-[122px] text-center bg-violet text-xl font-opnesans font-semibold text-white rounded-[9px] inline-block cursor-pointer active:scale-[0.98] mb-10"
           >
-            Login to Continue
+            {spinner ? <PacmanLoader className='me-8 ' color="#fff" size={12} /> : "Login to Continue"}
           </p>
           <p className="text-darkBlueTwo text-[14px] font-opnesans">
             Don’t have an account ?{" "}
@@ -137,3 +200,6 @@ const Login = () => {
 }
 
 export default Login
+
+
+
