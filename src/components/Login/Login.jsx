@@ -12,90 +12,87 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import Home from '../Home/Home';
 
 const Login = () => {
-
-  const [email, setEmail]=useState("")
+  // for email validation
+  const [email, setEmail] = useState("");
   const [emailErr, setEmailErr] = useState("");
 
+  // for password validation
   const [password, setPassword] = useState("");
   const [passwordErr, setPasswordErr] = useState("");
 
-   const [showPassword, setShowPassword] = useState(false);
+  // for show password
+  const [showPassword, setShowPassword] = useState(false);
 
-   const [spinner, setSpinner]=useState(true)
+  // for spinner loader
+  const [spinner, setSpinner] = useState(true);
 
-   const navigate = useNavigate()
+  // for successful navigation to home page on sign in
+  const navigate = useNavigate();
 
-   const handleShowPass = () => {
-     setShowPassword(!showPassword);
-   };
+  // for changing password type
+  const handleShowPass = () => {
+    setShowPassword(!showPassword);
+  };
 
-  const handleEmail = (e)=>{
-     setEmail(e.target.value)
-     setEmailErr("")
-     
-     
-  }
-  const handlePassword = (e)=>{
-     setPassword(e.target.value)
-     setPasswordErr("")
-     
-     
-  }
+  // for email catching input value
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+    setEmailErr("");
+  };
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+    setPasswordErr("");
+  };
 
-  const handleSubmit =()=>{
-         if(!email){
-          setEmailErr("Enter an email addess")
-         }else if(!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)){
-          setEmailErr("Enter an valid email address")
-         }
+  // for actions clicking submit
+  const handleSubmit = () => {
+    // for email
+    if (!email) {
+      setEmailErr("Enter an email addess");
+    } else if (
+      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)
+    ) {
+      setEmailErr("Enter an valid email address");
+    }
 
-         if(!password){
-          setPasswordErr("Enter a password")
-         }
-         if(email && password){
+    // for password
+    if (!password) {
+      setPasswordErr("Enter a password");
+    }
 
-          const auth = getAuth();
-          signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
+    // for sign in
+    if (email && password) {
+      const auth = getAuth();
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          setEmailErr("");
+          setPasswordErr("");
+          // Signed in
+          const user = userCredential.user;
 
-              
-                  setEmailErr("")
-                  setPasswordErr("")
-              // Signed in
-              const user = userCredential.user;
+          if (user.emailVerified === false) {
+            toast.error("Verify your email address");
+          } else {
+            toast.success("Login Successful");
 
-              
-              if(user.emailVerified === false){
-                toast.error("Verify your email address")
-              }else{
-                  toast.success("Login Successful");
+            setTimeout(() => {
+              navigate("/Home");
+            }, 4000);
 
-                  setTimeout(() => {
-                    navigate("/Home");
-                  }, 4000);
+            setSpinner(true);
+          }
 
-                  setSpinner(true);
-              }
-              
-              // ...
-            })
-            .catch((error) => {
-              const errorCode = error.code;
-              if(errorCode.includes("auth/invalid-credential")){
-                setEmailErr("Enter a registered email or sign up")
-                setPasswordErr("Wrong password")
-              }
-              
-              
-            });
-
-
-          
-         }
-
-
-  }
- 
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          if (errorCode.includes("auth/invalid-credential")) {
+            setEmailErr("Enter a registered email or sign up");
+            setPasswordErr("Wrong password");
+          }
+        });
+    }
+  };
 
   return (
     <>
@@ -178,7 +175,11 @@ const Login = () => {
             onClick={handleSubmit}
             className="py-[26px] w-full md:w-auto md:px-[122px] text-center bg-violet text-xl font-opnesans font-semibold text-white rounded-[9px] inline-block cursor-pointer active:scale-[0.98] mb-10"
           >
-            {spinner ? <PacmanLoader className='me-8 ' color="#fff" size={12} /> : "Login to Continue"}
+            {spinner ? (
+              <PacmanLoader className="me-8 " color="#fff" size={12} />
+            ) : (
+              "Login to Continue"
+            )}
           </p>
           <p className="text-darkBlueTwo text-[14px] font-opnesans">
             Don’t have an account ?{" "}
