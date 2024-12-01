@@ -24,7 +24,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   // for spinner loader
-  const [spinner, setSpinner] = useState(true);
+  const [spinner, setSpinner] = useState(false);
 
   // for successful navigation to home page on sign in
   const navigate = useNavigate();
@@ -88,6 +88,10 @@ const Login = () => {
           const errorCode = error.code;
           if (errorCode.includes("auth/invalid-credential")) {
             setEmailErr("Enter a registered email or sign up");
+            console.log(errorCode);
+            
+            
+          }else if(errorCode.includes("auth/wrong-password")){
             setPasswordErr("Wrong password");
           }
         });
