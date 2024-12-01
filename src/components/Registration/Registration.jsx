@@ -9,10 +9,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { CircleLoader } from "react-spinners";
 
 const Registration = () => {
   const auth = getAuth();
   const navigate = useNavigate();
+
+  // for loading animation 
+  const [loading, setLoading]=useState(false)
 
   // for email validation
   const [email, setEmail] = useState("");
@@ -163,6 +167,7 @@ const Registration = () => {
     ) {
       createUserWithEmailAndPassword(auth, email, password)
         .then(() => {
+          setLoading(true)
           toast.success("Registration Successful");
 
           setTimeout(() => {
@@ -214,7 +219,7 @@ const Registration = () => {
           </p>
 
           <form className="mb-[36px]">
-            <div className="form-control relative md:mb-[56px] mb-8">
+            <div className="form-control relative mb-[56px] ">
               <input
                 onChange={handleEmail}
                 value={email}
@@ -233,7 +238,7 @@ const Registration = () => {
               </p>
             </div>
 
-            <div className="form-control relative md:mb-[56px] mb-8">
+            <div className="form-control relative mb-[56px]">
               <input
                 onChange={handleFullName}
                 value={fullName}
@@ -253,7 +258,7 @@ const Registration = () => {
               </p>
             </div>
 
-            <div className="form-control relative md:mb-[56px] mb-8">
+            <div className="form-control relative md:mb-[56px] mb-[70px]">
               {showPassword ? (
                 <FaFaceFlushed
                   onClick={handleShowPass}
@@ -363,12 +368,25 @@ const Registration = () => {
                 }`}</p>
               )}
             </div>
-
             <p
               onClick={handleSubmit}
-              className="py-5 md:px-[145px] md:mt-0 mt-8 w-full md:w-auto text-center inline-block bg-violet text-white font-nunito text-xl font-semibold rounded-[86px] cursor-pointer active:scale-[0.98]"
+              className="py-5 md:px-[145px] md:mt-0 mt-8 w-full md:w-auto text-center inline-block bg-violet text-white font-nunito text-xl font-semibold rounded-[86px] cursor-pointer active:scale-[0.98] relative"
             >
               Sign up
+              <span className="absolute top-[20px] right-[90px]">
+                {loading ? <CircleLoader
+                  className="mx-auto"
+                  color="#fff"
+                  cssOverride={{}}
+                  loading
+                  size={30}
+                  speedMultiplier={1}
+                />
+                :
+                ""
+              }
+                
+              </span>
             </p>
           </form>
           <p className="text-darkBlueTwo font-opnesans text-[14px] text-center w-[350px] mb-12 md:mb-0">
