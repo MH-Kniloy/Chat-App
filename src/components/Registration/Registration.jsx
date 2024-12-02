@@ -50,11 +50,6 @@ const Registration = () => {
   const [numberErr, setNumberErr] = useState("");
   const [specialErr, setSpecialErr] = useState("");
   const [eightErr, setEightErr] = useState("");
-  const [greenOne, setGreenOne] = useState(false);
-  const [greenTwo, setGreenTwo] = useState(false);
-  const [greenThree, setGreenThree] = useState(false);
-  const [greenFour, setGreenFour] = useState(false);
-  const [greenFive, setGreenFive] = useState(false);
 
   const handlePassword = (e) => {
     const value = e.target.value;
@@ -67,35 +62,6 @@ const Registration = () => {
     setSpecialErr("Special Character,");
     setEightErr("At least 8 characters long");
 
-    if (/(?=.*[A-Z])/.test(value)) {
-      setGreenOne(true);
-    } else {
-      setGreenOne(false);
-    }
-
-    if (/(?=.*[a-z])/.test(value)) {
-      setGreenTwo(true);
-    } else {
-      setGreenTwo(false);
-    }
-
-    if (/(?=.*[0-9])/.test(value)) {
-      setGreenThree(true);
-    } else {
-      setGreenThree(false);
-    }
-
-    if (/(?=.*[!@#$%^&*(),.?":{}|<>])/.test(value)) {
-      setGreenFour(true);
-    } else {
-      setGreenFour(false);
-    }
-
-    if (/(?=.{8,})/.test(value)) {
-      setGreenFive(true);
-    } else {
-      setGreenFive(false);
-    }
   };
 
   // for confirm password
@@ -299,34 +265,44 @@ const Registration = () => {
                 {/* {`${uppercaseErr} ${lowercaseErr} ${numberErr} ${specialErr} ${eightErr}`} */}
                 <span
                   className={`${
-                    greenOne ? "text-green-500" : "text-red-600"
+                    /(?=.*[A-Z])/.test(password)
+                      ? "text-green-500"
+                      : "text-red-600"
                   } me-1 `}
                 >
                   {uppercaseErr}
                 </span>
                 <span
                   className={`${
-                    greenTwo ? "text-green-500" : "text-red-600"
+                    /(?=.*[a-z])/.test(password)
+                      ? "text-green-500"
+                      : "text-red-600"
                   } me-1`}
                 >
                   {lowercaseErr}
                 </span>
                 <span
                   className={`${
-                    greenThree ? "text-green-500" : "text-red-600"
+                    /(?=.*[0-9])/.test(password)
+                      ? "text-green-500"
+                      : "text-red-600"
                   } me-1`}
                 >
                   {numberErr}
                 </span>
                 <span
                   className={`${
-                    greenFour ? "text-green-500" : "text-red-600"
+                    /(?=.*[!@#$%^&*(),.?":{}|<>])/.test(password)
+                      ? "text-green-500"
+                      : "text-red-600"
                   } me-1`}
                 >
                   {specialErr}
                 </span>
                 <span
-                  className={`${greenFive ? "text-green-500" : "text-red-600"}`}
+                  className={`${
+                    /(?=.{8,})/.test(password) ? "text-green-500" : "text-red-600"
+                  }`}
                 >
                   {eightErr}
                 </span>
@@ -383,21 +359,18 @@ const Registration = () => {
               onClick={handleSubmit}
               className="py-5 md:px-[145px] md:mt-0 mt-8 w-full md:w-auto text-center inline-block bg-violet text-white font-nunito text-xl font-semibold rounded-[86px] cursor-pointer active:scale-[0.98] relative"
             >
-              
-              
-                {loading ? (
-                  <CircleLoader
-                    className="mx-auto"
-                    color="#fff"
-                    cssOverride={{}}
-                    loading
-                    size={30}
-                    speedMultiplier={1}
-                  />
-                ) : (
-                  "Sign up"
-                )}
-              
+              {loading ? (
+                <CircleLoader
+                  className="mx-auto"
+                  color="#fff"
+                  cssOverride={{}}
+                  loading
+                  size={30}
+                  speedMultiplier={1}
+                />
+              ) : (
+                "Sign up"
+              )}
             </p>
           </form>
           <p className="text-darkBlueTwo font-opnesans text-[14px] text-center w-[350px] mb-12 md:mb-0">
