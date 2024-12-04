@@ -17,6 +17,9 @@ export default {
       transitionTimingFunction: {
         custom: "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
       },
+      boxShadow: {
+        custom: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+      },
     },
   },
   plugins: [],
