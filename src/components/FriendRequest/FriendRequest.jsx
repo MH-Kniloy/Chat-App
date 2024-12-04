@@ -31,7 +31,7 @@ const FriendRequest = () => {
   ];
   return (
     <div className="p-5 rounded-[20px] shadow-custom mt-9 h-[445px] overflow-auto">
-      <div className="flex justify-between mb-6">
+      <div className="flex justify-between mb-9">
         <h3 className="font-poppins font-semibold text-xl">Friend Request</h3>
         <BsThreeDotsVertical className="text-2xl text-violet cursor-pointer " />
       </div>
