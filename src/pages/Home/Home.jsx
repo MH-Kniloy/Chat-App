@@ -7,6 +7,7 @@ import FriendList from '../../components/FriendList/FriendList'
 import UserList from '../../components/UserList/UserList'
 import FriendRequest from '../../components/FriendRequest/FriendRequest'
 import MyGroup from '../../components/MyGroup/MyGroup'
+import BlockedUsers from '../../components/BlockedUsers/BlockedUsers'
 
 const Home = () => {
   return (
@@ -39,7 +40,7 @@ const Home = () => {
               <MyGroup />
              </div>
              <div className='w-[32%]'>
-              <UserList />
+              <BlockedUsers />
              </div>
 
           </div>
