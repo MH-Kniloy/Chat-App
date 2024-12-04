@@ -4,6 +4,31 @@ input:-webkit-autofill {
   -webkit-text-fill-color: #000 !important; /* Text color */
   transition: background-color 5000s ease-in-out 0s; /* Prevent flickering */
 }
+   /* width */
+::-webkit-scrollbar {
+  width: 7px;
+  border-bottom-right-radius: 1000px;
+  border-top-right-radius: 1000px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #dedbdb; 
+  border-bottom-right-radius: 1000px;
+  border-top-right-radius: 1000px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #88888854; 
+  border-bottom-right-radius: 1000px;
+  border-top-right-radius: 1000px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #55555598; 
+}
 
 .form-control input:focus + label span,
 .form-control input:valid + label span {
@@ -29,4 +54,7 @@ input:-webkit-autofill {
 .form-control-two:nth-of-type(2) label span:nth-child(5){
    padding-right: 6px;
 }
+
+
+
 

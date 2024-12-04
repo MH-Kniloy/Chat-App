@@ -24,20 +24,20 @@ const GroupList = () => {
       },
     ];
   return (
-    <div className="p-5 rounded-[20px] shadow-custom mt-10">
-      <div className='flex justify-between mb-4'>
+    <div className="p-5 rounded-[20px] shadow-custom mt-9 h-[360px] overflow-auto">
+      <div className="flex justify-between mb-4">
         <h3 className="font-poppins font-semibold text-xl">Group List</h3>
         <BsThreeDotsVertical className="text-2xl text-violet cursor-pointer " />
       </div>
 
       <div>
-        {
-            groupDetails.map((items)=>(
-
-                <GroupComponent image={items.image} name={items.name} message={items.message} />
-            ))
-        }
-       
+        {groupDetails.map((items) => (
+          <GroupComponent
+            image={items.image}
+            name={items.name}
+            message={items.message}
+          />
+        ))}
       </div>
     </div>
   );

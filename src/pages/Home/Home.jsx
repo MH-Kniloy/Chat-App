@@ -4,6 +4,8 @@ import SidebarMenu from '../../components/SidebarMenu/SidebarMenu'
 import SearchBar from '../../components/SearchBar/SearchBar'
 import GroupList from '../../components/GroupList/GroupList'
 import FriendList from '../../components/FriendList/FriendList'
+import UserList from '../../components/UserList/UserList'
+import FriendRequest from '../../components/FriendRequest/FriendRequest'
 
 const Home = () => {
   return (
@@ -11,26 +13,36 @@ const Home = () => {
     <Container>
 
          <section className='flex'>
-          <div className='w-[10%] me-[50px]'>
             
             <SidebarMenu />
-          </div>
           
-          <div className='w-[90%] flex gap-5'>
+          
+          <div className='w-[90%] flex gap-5 flex-wrap'>
 
-             <div className='w-[33%] '>
+             <div className='w-[32%] '>
               <SearchBar />
               <GroupList />
              </div>
-             <div className='w-[33%]'>
+             <div className='w-[32%]'>
               
               <FriendList />
              </div>
-             <div className='w-[33%]'>
-              <SearchBar />
+             <div className='w-[32%]'>
+              <UserList />
+             </div>
+             <div className='w-[32%] '>
+              <FriendRequest />
+             </div>
+             <div className='w-[32%]'>
+              
+              <FriendList />
+             </div>
+             <div className='w-[32%]'>
+              <UserList />
              </div>
 
           </div>
+         
          </section>
 
     </Container>

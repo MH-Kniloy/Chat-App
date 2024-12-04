@@ -7,7 +7,7 @@ const Settings = () => {
       <section>
         <div className="flex">
           <SidebarMenu />
-          <div className="text-5xl text-violet font-bold font-nunito text-center w-[90%] h-[5000px]">
+          <div className="text-5xl text-violet font-bold font-nunito text-center w-[90%]">
             Settings
           </div>
         </div>
