@@ -10,7 +10,7 @@ import { Link, NavLink } from "react-router-dom";
 
 const SidebarMenu = () => {
   return (
-    <div className="w-[10%] bg-violet h-[93vh] rounded-[20px] flex justify-center me-[45px]">
+    <div className="w-[10%] bg-violet h-[93vh] rounded-[20px] flex justify-center me-[45px] fixed">
       <nav className="flex flex-col items-center gap-[100px]">
         <div>
           <img className=" pt-10" src={profilePic} alt="" />
