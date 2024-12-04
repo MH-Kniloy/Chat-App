@@ -6,10 +6,10 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import Registration from "./components/Registration/Registration";
-import Login from "./components/Login/Login"
+import Registration from "./pages/Registration/Registration";
+import Login from "./pages/Login/Login"
 import firebaseConfig from "./components/Authentication/Firebase.config";
-import Home from "./components/Home/Home";
+import Home from "./pages/Home/Home";
 
 function App() {
   

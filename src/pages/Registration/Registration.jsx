@@ -1,4 +1,4 @@
-import Wavelabel from "../Wavelabel/Wavelabel";
+import Wavelabel from "../../components/Wavelabel/Wavelabel";
 import registrationImg from "../../assets/registration.png";
 import { useState } from "react";
 import { FaFaceDizzy } from "react-icons/fa6";
@@ -19,8 +19,8 @@ const Registration = () => {
   const auth = getAuth();
   const navigate = useNavigate();
 
-  // for loading animation 
-  const [loading, setLoading]=useState(false)
+  // for loading animation
+  const [loading, setLoading] = useState(false);
 
   // for email validation
   const [email, setEmail] = useState("");
@@ -61,7 +61,6 @@ const Registration = () => {
     setNumberErr("Number,");
     setSpecialErr("Special Character,");
     setEightErr("At least 8 characters long");
-
   };
 
   // for confirm password
@@ -143,7 +142,7 @@ const Registration = () => {
 
             toast.success("Verification Email Sent");
           });
-          setLoading(true)
+          setLoading(true);
           toast.success("Registration Successful");
 
           setTimeout(() => {
@@ -161,7 +160,6 @@ const Registration = () => {
 
           // ..
         });
-        
 
       setEmail("");
       setFullName("");
@@ -301,7 +299,9 @@ const Registration = () => {
                 </span>
                 <span
                   className={`${
-                    /(?=.{8,})/.test(password) ? "text-green-500" : "text-red-600"
+                    /(?=.{8,})/.test(password)
+                      ? "text-green-500"
+                      : "text-red-600"
                   }`}
                 >
                   {eightErr}

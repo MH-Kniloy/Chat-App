@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import Loginimg from '../../assets/login.png'
-import Google from '../../assets/google.png'
-import Wavelabel from '../Wavelabel/Wavelabel'
+import React, { useState } from "react";
+import Loginimg from "../../assets/login.png";
+import Google from "../../assets/google.png";
+import Wavelabel from "../../components/Wavelabel/Wavelabel";
 import { Link, useNavigate } from "react-router-dom";
 import { FaFaceDizzy } from "react-icons/fa6";
 import { FaFaceFlushed } from "react-icons/fa6";
@@ -9,7 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { PacmanLoader } from "react-spinners";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import Home from '../Home/Home';
+import Home from "../Home/Home";
 
 const Login = () => {
   // for email validation
@@ -89,7 +89,6 @@ const Login = () => {
           if (errorCode.includes("auth/invalid-credential")) {
             setEmailErr("Enter a registered email or sign up");
             setPasswordErr("Wrong password");
-            
           }
         });
     }
@@ -199,9 +198,6 @@ const Login = () => {
       </section>
     </>
   );
-}
+};
 
-export default Login
-
-
-
+export default Login;
