@@ -94,7 +94,7 @@ const SidebarMenu = () => {
                 </div>
                 <div className="actions">
                   <button
-                    className="button bg-violet px-5 py-2 rounded-[10px] text-xl font-semibold font-poppins text-white me-4"
+                    className="button bg-violet px-5 py-2 rounded-[10px] text-xl font-semibold font-poppins cursor-pointer text-white me-4"
                     onClick={() => {
                       navigate("/Login");
                     }}
@@ -102,7 +102,7 @@ const SidebarMenu = () => {
                     Yes
                   </button>
                   <button
-                    className="button bg-violet px-5 py-2 rounded-[10px] text-xl font-semibold font-poppins text-white"
+                    className="button bg-violet px-5 py-2 rounded-[10px] text-xl font-semibold font-poppins cursor-pointer text-white"
                     onClick={() => {
                       console.log("modal closed ");
                       close();
