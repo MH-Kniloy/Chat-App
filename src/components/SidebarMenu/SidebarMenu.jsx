@@ -6,13 +6,29 @@ import { AiOutlineMessage } from "react-icons/ai";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { IoSettingsOutline } from "react-icons/io5";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import Popup from "reactjs-popup";
+import { getAuth, signOut } from "firebase/auth";
 
 
 const SidebarMenu = () => {
+  const auth = getAuth();
   const navigate = useNavigate()
   return (
     <div className="w-[10%] bg-violet h-[960px] rounded-[20px] flex justify-center me-[45px]">
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition:Flip
+      />
       <nav className="flex flex-col items-center gap-[100px]">
         <div>
           <img className=" pt-10" src={profilePic} alt="" />
@@ -82,10 +98,7 @@ const SidebarMenu = () => {
             {(close) => (
               <div className="modal bg-white shadow-custom bg-opacity-70 p-12 rounded-[10px]">
                 <div className="header font-poppins font-bold ">
-                  <p className="text-2xl">
-
-                  Logout
-                  </p>
+                  <p className="text-2xl">Logout</p>
                 </div>
                 <div className="content">
                   <p className="font-poppins font-medium text-xl">
@@ -96,7 +109,17 @@ const SidebarMenu = () => {
                   <button
                     className="button bg-violet px-5 py-2 rounded-[10px] text-xl font-semibold font-poppins cursor-pointer text-white me-4"
                     onClick={() => {
-                      navigate("/Login");
+                      signOut(auth)
+                        .then(() => {
+                          toast.success("Loguot Successfull")
+                          setTimeout(()=>{
+                             navigate("/Login")
+                          }, 4000)
+                        })
+                        .catch((error) => {
+                          console.log(error);
+                          
+                        });
                     }}
                   >
                     Yes
