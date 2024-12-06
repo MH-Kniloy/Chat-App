@@ -14,6 +14,7 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CircleLoader } from "react-spinners";
+import PasswordStrengthMeter from "../../components/PasswordStrengthMeter/PasswordStrengthMeter";
 
 const Registration = () => {
   const auth = getAuth();
@@ -44,6 +45,9 @@ const Registration = () => {
   const [password, setPassword] = useState("");
   const [passwordErr, setPasswordErr] = useState("");
 
+  // for password strength meter 
+  const [passwordMeter, setPasswordMeter] = useState("")
+
   // for multiple error
   const [uppercaseErr, setUppercaseErr] = useState("");
   const [lowercaseErr, setLowercaseErr] = useState("");
@@ -55,7 +59,7 @@ const Registration = () => {
     const value = e.target.value;
     setPassword(value);
     setPasswordErr("");
-
+    setPasswordMeter(<PasswordStrengthMeter password={password} />);
     setUppercaseErr("Uppercase,");
     setLowercaseErr("Lowercase,");
     setNumberErr("Number,");
@@ -107,6 +111,7 @@ const Registration = () => {
       setSpecialErr("");
       setNumberErr("");
       setEightErr("");
+      setPasswordMeter("")
     } else if (
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+={}\[\]:;"'<>,.?/\\|`~-]).{8,}$/.test(
         password
@@ -259,7 +264,11 @@ const Registration = () => {
                 }
                 text={"Password"}
               ></Wavelabel>
-              <p className="absolute top-[90px] left-[10px] font-nunito text-red-600">
+              <div className="absolute top-[85px] left-[0px]">
+                {passwordMeter}
+              </div>
+
+              <p className="absolute top-[105px] left-[0px] font-nunito text-red-600">
                 {/* {`${uppercaseErr} ${lowercaseErr} ${numberErr} ${specialErr} ${eightErr}`} */}
                 <span
                   className={`${
