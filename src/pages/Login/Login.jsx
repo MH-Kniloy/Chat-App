@@ -173,7 +173,7 @@ const Login = () => {
           </div>
           <p
             onClick={handleSubmit}
-            className="py-[26px] w-full md:w-auto md:px-[122px] text-center bg-violet text-xl font-opnesans font-semibold text-white rounded-[9px] inline-block cursor-pointer active:scale-[0.98] mb-10"
+            className="py-[26px] w-full md:w-auto md:px-[122px] text-center bg-violet text-xl font-opnesans font-semibold text-white rounded-[9px] inline-block cursor-pointer active:scale-[0.98]"
           >
             {spinner ? (
               <PacmanLoader className="me-8 " color="#fff" size={12} />
@@ -181,14 +181,17 @@ const Login = () => {
               "Login to Continue"
             )}
           </p>
+          <p className="text-violet font-opnesans font-semibold mb-10 mt-2">
+            <Link to="/Forgotpassword">Forgot password</Link>
+          </p>
           <p className="text-darkBlueTwo text-[14px] font-opnesans">
-            Don’t have an account ?{" "}
+            Don’t have an account ?
             <Link
-              className="text-orange font-bold cursor-pointer"
+              className="text-orange font-bold cursor-pointer ms-1"
               to="/Registration"
             >
               Sign up
-            </Link>{" "}
+            </Link>
           </p>
         </div>
 

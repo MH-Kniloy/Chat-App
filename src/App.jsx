@@ -13,6 +13,7 @@ import Home from "./pages/Home/Home";
 import Messages from "./pages/Messages/Messages";
 import Notifications from "./pages/Notifications/Notifications";
 import Settings from "./pages/Settings/Settings";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 
 function App() {
   
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
       <Route path="/Messages" element={<Messages />} />
       <Route path="/Notifications" element={<Notifications />} />
       <Route path="/Settings" element={<Settings />} />
+      <Route path="/Forgotpassword" element={<ForgotPassword />} />
       <Route path="*" element={<Navigate to="/Registration" replace />} />
     </Route>
   )
