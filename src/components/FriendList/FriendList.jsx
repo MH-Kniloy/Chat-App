@@ -33,6 +33,56 @@ const FriendList = () => {
       time: "Today, 12:22pm",
     },
     
+    {
+      image: `${friendlist1}`,
+      name: "Raghav",
+      message: "Dinner?",
+      time: "Today, 8:56pm",
+    },
+    {
+      image: `${friendlist2}`,
+      name: "Swathi",
+      message: "Sure!",
+      time: "Today, 2:31pm",
+    },
+    {
+      image: `${friendlist3}`,
+      name: "Kiran",
+      message: "Hi.....",
+      time: "Yesterday, 6:22pm",
+    },
+    {
+      image: `${friendlist4}`,
+      name: "Tejeshwini C",
+      message: "I will call him today.",
+      time: "Today, 12:22pm",
+    },
+    
+    {
+      image: `${friendlist1}`,
+      name: "Raghav",
+      message: "Dinner?",
+      time: "Today, 8:56pm",
+    },
+    {
+      image: `${friendlist2}`,
+      name: "Swathi",
+      message: "Sure!",
+      time: "Today, 2:31pm",
+    },
+    {
+      image: `${friendlist3}`,
+      name: "Kiran",
+      message: "Hi.....",
+      time: "Yesterday, 6:22pm",
+    },
+    {
+      image: `${friendlist4}`,
+      name: "Tejeshwini C",
+      message: "I will call him today.",
+      time: "Today, 12:22pm",
+    },
+    
     
   ];
   return (

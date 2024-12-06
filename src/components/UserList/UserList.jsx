@@ -34,6 +34,58 @@ const UserList = () => {
       time: "Today, 8:56pm",
     },
     
+    {
+      image: `${friendlist1}`,
+      name: "Raghav",
+      time: "Today, 8:56pm",
+    },
+    {
+      image: `${friendlist2}`,
+      name: "Swathi",
+      time: "Today, 2:31pm",
+    },
+    {
+      image: `${friendlist3}`,
+      name: "Kiran",
+      time: "Yesterday, 6:22pm",
+    },
+    {
+      image: `${friendlist4}`,
+      name: "Tejeshwini C",
+      time: "Today, 12:22pm",
+    },
+    {
+      image: `${friendlist5}`,
+      name: "Marvin McKinney",
+      time: "Today, 8:56pm",
+    },
+    
+    {
+      image: `${friendlist1}`,
+      name: "Raghav",
+      time: "Today, 8:56pm",
+    },
+    {
+      image: `${friendlist2}`,
+      name: "Swathi",
+      time: "Today, 2:31pm",
+    },
+    {
+      image: `${friendlist3}`,
+      name: "Kiran",
+      time: "Yesterday, 6:22pm",
+    },
+    {
+      image: `${friendlist4}`,
+      name: "Tejeshwini C",
+      time: "Today, 12:22pm",
+    },
+    {
+      image: `${friendlist5}`,
+      name: "Marvin McKinney",
+      time: "Today, 8:56pm",
+    },
+    
   ];
   return (
     <div className="p-5 rounded-[20px] shadow-custom h-[450px] overflow-auto ">
