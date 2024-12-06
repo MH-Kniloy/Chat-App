@@ -31,6 +31,7 @@ const Login = () => {
         setTimeout(()=>{
            navigate("/Home")
         }, 4000)
+        setSpinner(true);
       })
       .catch((error) => {
         // Handle Errors here.
@@ -212,7 +213,7 @@ const Login = () => {
               "Login to Continue"
             )}
           </p>
-          <p className="text-violet font-opnesans font-semibold mb-10 mt-2">
+          <p className="text-orange font-opnesans font-semibold mb-10 mt-2">
             <Link to="/Forgotpassword">Forgot password</Link>
           </p>
           <p className="text-darkBlueTwo text-[14px] font-opnesans">

@@ -9,7 +9,7 @@ export default {
         nunito: ["Nunito", "sans-serif"],
       },
       colors: {
-        violet: "#5F35F5",
+        violet: "#11175D",
         darkBlueOne: "#11175D",
         darkBlueTwo: "#03014C",
         orange: "#EA6C00",
