@@ -8,10 +8,41 @@ import { FaFaceFlushed } from "react-icons/fa6";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { PacmanLoader } from "react-spinners";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import Home from "../Home/Home";
 
 const Login = () => {
+  // for google login firebase 
+  const provider = new GoogleAuthProvider();
+  const auth = getAuth();
+  
+  const handleGoogleLogin =()=>{
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+        toast.success("Login Successful")
+
+        setTimeout(()=>{
+           navigate("/Home")
+        }, 4000)
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+  }
   // for email validation
   const [email, setEmail] = useState("");
   const [emailErr, setEmailErr] = useState("");
@@ -115,7 +146,7 @@ const Login = () => {
             Login to your account!
           </h2>
 
-          <div className="flex mb-14 cursor-pointer gap-[10px] ps-[30px] py-[22px] border-[1px] border-darkBlueTwo border-opacity-30 w-[240px] rounded-[9px] active:scale-[0.98]">
+          <div onClick={handleGoogleLogin} className="flex mb-14 cursor-pointer gap-[10px] ps-[30px] py-[22px] border-[1px] border-darkBlueTwo border-opacity-30 w-[240px] rounded-[9px] active:scale-[0.98]">
             <img src={Google} alt="" />
             <p className="text-darkBlueTwo font-opnesans text-[14px] font-semibold tracking-[0.267px]">
               Login with Google
