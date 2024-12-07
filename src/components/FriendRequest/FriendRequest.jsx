@@ -1,34 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import friendlist1 from "../../assets/friend-list1.png";
-import friendlist2 from "../../assets/friend-list2.png";
-import friendlist3 from "../../assets/friend-list3.png";
-import friendlist4 from "../../assets/friend-list4.png";
 import FriendRequestComp from "../FriendRequestComp/FriendRequestComp";
+import { userInfo } from "../../context/UserContext/UserContext";
 
 const FriendRequest = () => {
-  const requestDetails = [
-    {
-      image: `${friendlist1}`,
-      name: "Raghav",
-      message: "Dinner?",
-    },
-    {
-      image: `${friendlist2}`,
-      name: "Swathi",
-      message: "Sure!",
-    },
-    {
-      image: `${friendlist3}`,
-      name: "Kiran",
-      message: "Hi.....",
-    },
-    {
-      image: `${friendlist4}`,
-      name: "Tejeshwini C",
-      message: "I will call him today.",
-    },
-  ];
+  const requestDetails = useContext(userInfo)
+  const slice=requestDetails.slice(0, 4)
   return (
     <div className="p-5 pt-0 rounded-[20px] shadow-custom mt-9 h-[445px] overflow-auto relative">
       <div className="flex justify-between mb-3 pt-5 bg-white sticky top-[0px] left-0 h-[70px] w-full">
@@ -37,7 +14,7 @@ const FriendRequest = () => {
       </div>
 
       <div>
-        {requestDetails.map((items) => (
+        {slice.map((items) => (
           <FriendRequestComp
             image={items.image}
             name={items.name}

@@ -1,38 +1,11 @@
-import React from 'react'
+import React, { useContext } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import friendlist1 from "../../assets/friend-list1.png";
-import friendlist2 from "../../assets/friend-list2.png";
-import friendlist3 from "../../assets/friend-list3.png";
-import friendlist4 from "../../assets/friend-list4.png";
-import MyGroupComp from '../MyGroupComp/MyGroupComp';
+import MyGroupComp from "../MyGroupComp/MyGroupComp";
+import { userInfo } from "../../context/UserContext/UserContext";
 
 const MyGroup = () => {
-  const myGroupDetails = [
-    {
-      image: `${friendlist1}`,
-      name: "Raghav",
-      message: "Dinner?",
-      time: "Today, 8:56pm",
-    },
-    {
-      image: `${friendlist2}`,
-      name: "Swathi",
-      message: "Sure!",
-      time: "Today, 2:31pm",
-    },
-    {
-      image: `${friendlist3}`,
-      name: "Kiran",
-      message: "Hi.....",
-      time: "Yesterday, 6:22pm",
-    },
-    {
-      image: `${friendlist4}`,
-      name: "Tejeshwini C",
-      message: "I will call him today.",
-      time: "Today, 12:22pm",
-    },
-  ];
+  const myGroupDetails = useContext(userInfo);
+  const slice = myGroupDetails.slice(0, 4);
   return (
     <div className="p-5 pt-0 rounded-[20px] shadow-custom mt-9 h-[445px] overflow-auto relative">
       <div className="flex justify-between mb-3 pt-5 bg-white sticky top-[0px] left-0 h-[70px] w-full">
@@ -41,7 +14,7 @@ const MyGroup = () => {
       </div>
 
       <div>
-        {myGroupDetails.map((items) => (
+        {slice.map((items) => (
           <MyGroupComp
             image={items.image}
             name={items.name}
@@ -52,5 +25,5 @@ const MyGroup = () => {
       </div>
     </div>
   );
-}
-export default MyGroup
+};
+export default MyGroup;

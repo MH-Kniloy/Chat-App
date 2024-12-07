@@ -1,28 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { BsThreeDotsVertical } from "react-icons/bs";
 import GroupComponent from '../GroupComponent/GroupComponent';
-import grouplist1 from '../../assets/group-list1.png'
-import grouplist2 from '../../assets/group-list2.png'
-import grouplist3 from '../../assets/group-list3.png'
+import { GroupInfo } from '../../context/GroupContext/GroupContext';
 
 const GroupList = () => {
-    const groupDetails = [
-      {
-        image: `${grouplist1}`,
-        name: "Friends Reunion",
-        message: "Hi Guys, Wassup!",
-      },
-      {
-        image: `${grouplist2}`,
-        name: "Friends Forever",
-        message: "Good to see you.",
-      },
-      {
-        image: `${grouplist3}`,
-        name: "Crazy Cousins",
-        message: "What plans today?",
-      },
-    ];
+   const groupDetails = useContext(GroupInfo)
   return (
     <div className="p-5 pt-0 rounded-[20px] shadow-custom mt-9 h-[360px] overflow-auto relative">
       <div className="flex justify-between mb-1 pt-5 bg-white sticky top-[0px] left-0 h-[70px] w-full">

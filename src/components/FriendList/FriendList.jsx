@@ -1,90 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { BsThreeDotsVertical } from "react-icons/bs";
-import friendlist1 from "../../assets/friend-list1.png";
-import friendlist2 from "../../assets/friend-list2.png";
-import friendlist3 from "../../assets/friend-list3.png";
-import friendlist4 from "../../assets/friend-list4.png";
 import FriendListComp from '../FriendListComp/FriendListComp';
+import { userInfo } from '../../context/UserContext/UserContext';
 
 const FriendList = () => {
-  const friendDetails = [
-    {
-      image: `${friendlist1}`,
-      name: "Raghav",
-      message: "Dinner?",
-      time: "Today, 8:56pm",
-    },
-    {
-      image: `${friendlist2}`,
-      name: "Swathi",
-      message: "Sure!",
-      time: "Today, 2:31pm",
-    },
-    {
-      image: `${friendlist3}`,
-      name: "Kiran",
-      message: "Hi.....",
-      time: "Yesterday, 6:22pm",
-    },
-    {
-      image: `${friendlist4}`,
-      name: "Tejeshwini C",
-      message: "I will call him today.",
-      time: "Today, 12:22pm",
-    },
-    
-    {
-      image: `${friendlist1}`,
-      name: "Raghav",
-      message: "Dinner?",
-      time: "Today, 8:56pm",
-    },
-    {
-      image: `${friendlist2}`,
-      name: "Swathi",
-      message: "Sure!",
-      time: "Today, 2:31pm",
-    },
-    {
-      image: `${friendlist3}`,
-      name: "Kiran",
-      message: "Hi.....",
-      time: "Yesterday, 6:22pm",
-    },
-    {
-      image: `${friendlist4}`,
-      name: "Tejeshwini C",
-      message: "I will call him today.",
-      time: "Today, 12:22pm",
-    },
-    
-    {
-      image: `${friendlist1}`,
-      name: "Raghav",
-      message: "Dinner?",
-      time: "Today, 8:56pm",
-    },
-    {
-      image: `${friendlist2}`,
-      name: "Swathi",
-      message: "Sure!",
-      time: "Today, 2:31pm",
-    },
-    {
-      image: `${friendlist3}`,
-      name: "Kiran",
-      message: "Hi.....",
-      time: "Yesterday, 6:22pm",
-    },
-    {
-      image: `${friendlist4}`,
-      name: "Tejeshwini C",
-      message: "I will call him today.",
-      time: "Today, 12:22pm",
-    },
-    
-    
-  ];
+  const friendDetails =useContext(userInfo)
+
   return (
     <div className="p-5 pt-0 rounded-[20px] shadow-custom h-[450px] overflow-auto relative">
       
@@ -96,8 +17,9 @@ const FriendList = () => {
     
 
       <div>
-        {friendDetails.map((items) => (
+        {friendDetails.map((items, index) => (
           <FriendListComp
+          key={index}
             image={items.image}
             name={items.name}
             message={items.message}
