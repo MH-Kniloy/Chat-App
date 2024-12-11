@@ -12,8 +12,9 @@ const UserList = () => {
       </div>
 
       <div>
-        {userDetails.map((items) => (
+        {userDetails.map((items, idx) => (
           <UserListComp
+            key={idx}
             image={items.image}
             name={items.name}
             time={items.time}

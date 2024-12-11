@@ -14,8 +14,9 @@ const MyGroup = () => {
       </div>
 
       <div>
-        {slice.map((items) => (
+        {slice.map((items, idx) => (
           <MyGroupComp
+            key={idx}
             image={items.image}
             name={items.name}
             message={items.message}

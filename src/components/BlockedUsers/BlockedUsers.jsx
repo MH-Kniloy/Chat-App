@@ -14,8 +14,9 @@ const BlockedUsers = () => {
       </div>
 
       <div>
-        {slice.map((items) => (
+        {slice.map((items, idx) => (
           <BlockedUserComp
+          key={idx}
             image={items.image}
             name={items.name}
             time={items.time}

@@ -19,7 +19,7 @@ const FriendList = () => {
       <div>
         {friendDetails.map((items, index) => (
           <FriendListComp
-          key={index}
+            key={index}
             image={items.image}
             name={items.name}
             message={items.message}

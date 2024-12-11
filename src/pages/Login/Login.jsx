@@ -10,8 +10,11 @@ import "react-toastify/dist/ReactToastify.css";
 import { PacmanLoader } from "react-spinners";
 import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import Home from "../Home/Home";
+import { useDispatch } from "react-redux";
+import { userLoginInfo } from "../../features/User/userSlice";
 
 const Login = () => {
+  const dispatch = useDispatch()
   // for google login firebase 
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
@@ -24,6 +27,7 @@ const Login = () => {
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
+        dispatch(userLoginInfo(user));
         // IdP data available using getAdditionalUserInfo(result)
         // ...
         toast.success("Login Successful")
@@ -101,7 +105,7 @@ const Login = () => {
           setPasswordErr("");
           // Signed in
           const user = userCredential.user;
-
+           dispatch(userLoginInfo(user))
           if (user.emailVerified === false) {
             toast.error("Verify your email address");
           } else {

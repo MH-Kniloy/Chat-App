@@ -14,8 +14,9 @@ const FriendRequest = () => {
       </div>
 
       <div>
-        {slice.map((items) => (
+        {slice.map((items, idx) => (
           <FriendRequestComp
+          key={idx}
             image={items.image}
             name={items.name}
             message={items.message}

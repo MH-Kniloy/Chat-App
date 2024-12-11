@@ -13,8 +13,9 @@ const GroupList = () => {
       </div>
 
       <div>
-        {groupDetails.map((items) => (
+        {groupDetails.map((items, idx) => (
           <GroupComponent
+          key={idx}
             image={items.image}
             name={items.name}
             message={items.message}
