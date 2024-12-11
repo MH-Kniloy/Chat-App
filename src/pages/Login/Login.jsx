@@ -100,12 +100,12 @@ const Login = () => {
     if (email && password) {
       const auth = getAuth();
       signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
+        .then((user) => {
           setEmailErr("");
           setPasswordErr("");
           // Signed in
-          const user = userCredential.user;
-           dispatch(userLoginInfo(user))
+          // const user = userCredential.user;
+           dispatch(userLoginInfo(user.user))
           if (user.emailVerified === false) {
             toast.error("Verify your email address");
           } else {
