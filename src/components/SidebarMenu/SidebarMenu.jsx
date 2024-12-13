@@ -111,6 +111,7 @@ const SidebarMenu = () => {
                     onClick={() => {
                       signOut(auth)
                         .then(() => {
+                          localStorage.clear()
                           toast.success("Loguot Successfull")
                           setTimeout(()=>{
                              navigate("/Login")
