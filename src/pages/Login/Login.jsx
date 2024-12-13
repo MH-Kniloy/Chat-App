@@ -101,18 +101,19 @@ const Login = () => {
     if (email && password) {
       const auth = getAuth();
       signInWithEmailAndPassword(auth, email, password)
-        .then((user) => {
+        .then((userCredential) => {
+          
           setEmailErr("");
           setPasswordErr("");
           // Signed in
-          // const user = userCredential.user;
-           dispatch(userLoginInfo(user.user))
-           localStorage.setItem("userLoginInfo", JSON.stringify(user.user))
-          if (user.emailVerified === false) {
+          const user = userCredential.user;
+          dispatch(userLoginInfo(user))
+          localStorage.setItem("userLoginInfo", JSON.stringify(user))
+          if (!user.emailVerified) {
             toast.error("Verify your email address");
           } else {
             toast.success("Login Successful");
-
+            
             setTimeout(() => {
               navigate("/Home");
             }, 4000);
