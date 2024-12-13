@@ -27,7 +27,7 @@ const router = createBrowserRouter(
       <Route path="/Notifications" element={<Notifications />} />
       <Route path="/Settings" element={<Settings />} />
       <Route path="/Forgotpassword" element={<ForgotPassword />} />
-      <Route path="*" element={<Navigate to="/Registration" replace />} />
+      <Route path="*" element={localStorage.getItem("userLoginInfo")? <Navigate to="/Home"/> :<Navigate to="/Registration" replace />} />
     </Route>
   )
 );
