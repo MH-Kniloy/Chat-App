@@ -28,6 +28,7 @@ const Login = () => {
         // The signed-in user info.
         const user = result.user;
         dispatch(userLoginInfo(user));
+        localStorage.setItem("userLoginInfo", JSON.stringify(user))
         // IdP data available using getAdditionalUserInfo(result)
         // ...
         toast.success("Login Successful")
@@ -106,6 +107,7 @@ const Login = () => {
           // Signed in
           // const user = userCredential.user;
            dispatch(userLoginInfo(user.user))
+           localStorage.setItem("userLoginInfo", JSON.stringify(user.user))
           if (user.emailVerified === false) {
             toast.error("Verify your email address");
           } else {
