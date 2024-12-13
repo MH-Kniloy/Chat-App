@@ -1,7 +1,16 @@
-import React from 'react'
+import React, { useEffect } from "react";
 import Container from "../../components/Container/Container";
 import SidebarMenu from "../../components/SidebarMenu/SidebarMenu";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 const Settings = () => {
+  const reduxData = useSelector((state) => state.userDetails.userCredentials);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!reduxData) {
+      navigate("/Login");
+    }
+  }, []);
   return (
     <Container>
       <section>
@@ -14,6 +23,6 @@ const Settings = () => {
       </section>
     </Container>
   );
-}
+};
 
-export default Settings
+export default Settings;
