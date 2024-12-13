@@ -10,6 +10,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   sendEmailVerification,
+  updateProfile,
 } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -131,46 +132,55 @@ const Registration = () => {
       setConfirmPasswordErr("");
     }
     // if password matches confirm password and all error clears then sign up btn submits
-    if (
-      confirmPassword === password &&
-      !emailErr &&
-      !fullNameErr &&
-      email &&
-      password &&
-      confirmPassword
-    ) {
-      createUserWithEmailAndPassword(auth, email, password)
-        .then(() => {
-          sendEmailVerification(auth.currentUser).then(() => {
-            // Email verification sent!
-            // ...
+if (
+  confirmPassword === password &&
+  !emailErr &&
+  !fullNameErr &&
+  email &&
+  password &&
+  confirmPassword
+) {
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
 
+      // Set the displayName for the user
+      updateProfile(user, {
+        displayName: fullName, // Assuming fullName is the input value for the user's full name
+      })
+        .then(() => {
+          sendEmailVerification(user).then(() => {
             toast.success("Verification Email Sent");
           });
-          setLoading(true);
-          toast.success("Registration Successful");
 
+          toast.success("Registration Successful");
           setTimeout(() => {
             navigate("/Login");
           }, 4000);
         })
-        .catch((error) => {
-          const errorCode = error.code;
-
-          if (errorCode.includes("auth/email-already-in-use")) {
-            setEmailErr(
-              "This email already in use, try again with another email"
-            );
-          }
-
-          // ..
+        .catch((updateError) => {
+          console.error("Error updating profile:", updateError);
+          toast.error("Error updating profile. Please try again.");
         });
 
-      setEmail("");
-      setFullName("");
-      setPassword("");
-      setConfirmPassword("");
-    }
+      setLoading(true);
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+
+      if (errorCode.includes("auth/email-already-in-use")) {
+        setEmailErr("This email already in use, try again with another email");
+      } else {
+        console.error("Error creating user:", error);
+        toast.error("Error creating account. Please try again.");
+      }
+    });
+
+  setEmail("");
+  setFullName("");
+  setPassword("");
+  setConfirmPassword("");
+}
   };
 
   return (
