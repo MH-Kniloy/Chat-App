@@ -15,7 +15,7 @@ const SidebarMenu = () => {
   const auth = getAuth();
   const navigate = useNavigate()
   return (
-    <div className="md:w-[10%] w-full bg-violet md:h-[960px] md:rounded-[20px] flex  justify-center me-[45px] md:static fixed top-0 left-0 z-10 ">
+    <div className="w-[10%] bg-violet h-[960px] rounded-[20px] md:flex justify-center me-[45px] hidden">
       <ToastContainer
         position="top-center"
         autoClose={3000}
@@ -29,12 +29,12 @@ const SidebarMenu = () => {
         theme="dark"
         transition:Flip
       />
-      <nav className="md:flex md:flex-col items-center gap-[100px]">
+      <nav className="flex flex-col items-center gap-[100px]">
         <div>
           <img className=" pt-10" src={profilePic} alt="" />
         </div>
 
-        <ul className="flex md:flex-col">
+        <ul className="flex flex-col">
           <li className="flex justify-center py-5 mb-7">
             <NavLink
               to="/Home"
