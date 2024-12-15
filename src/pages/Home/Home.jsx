@@ -22,7 +22,7 @@ const Home = () => {
   return (
     <>
       <Container>
-        <section className="flex">
+        <section className="md:flex md:mt-0 mt-[350px]">
           <SidebarMenu />
 
           <div className="md:w-[90%] flex gap-5 flex-wrap">

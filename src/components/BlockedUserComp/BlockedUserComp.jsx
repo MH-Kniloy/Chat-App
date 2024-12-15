@@ -14,7 +14,7 @@ const BlockedUserComp = ({ image, name, time }) => {
           </h5>
         </div>
         <div className="text-center">
-          <p className="text-xl font-poppins font-semibold text-white cursor-pointer bg-violet px-5 py-1 rounded-[5px] active:scale-[0.95]">
+          <p className="md:text-xl text-base font-poppins font-semibold text-white cursor-pointer bg-violet px-5 py-1 rounded-[5px] active:scale-[0.95]">
             Unblock
           </p>
         </div>
