@@ -15,7 +15,7 @@ const SidebarMenu = () => {
   const auth = getAuth();
   const navigate = useNavigate()
   return (
-    <div className="w-[10%] bg-violet h-[960px] rounded-[20px] flex justify-center me-[45px]">
+    <div className="w-[10%] bg-violet h-[960px] rounded-[20px] md:flex justify-center me-[45px]  hidden">
       <ToastContainer
         position="top-center"
         autoClose={3000}

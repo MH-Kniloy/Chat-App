@@ -25,24 +25,24 @@ const Home = () => {
         <section className="flex">
           <SidebarMenu />
 
-          <div className="w-[90%] flex gap-5 flex-wrap">
-            <div className="w-[32%] ">
+          <div className="md:w-[90%] flex gap-5 flex-wrap">
+            <div className="md:w-[32%] ">
               <SearchBar />
               <GroupList />
             </div>
-            <div className="w-[32%]">
+            <div className="md:w-[32%]">
               <FriendList />
             </div>
-            <div className="w-[32%]">
+            <div className="md:w-[32%]">
               <UserList />
             </div>
-            <div className="w-[32%] ">
+            <div className="md:w-[32%] ">
               <FriendRequest />
             </div>
-            <div className="w-[32%]">
+            <div className="md:w-[32%]">
               <MyGroup />
             </div>
-            <div className="w-[32%]">
+            <div className="md:w-[32%]">
               <BlockedUsers />
             </div>
           </div>
