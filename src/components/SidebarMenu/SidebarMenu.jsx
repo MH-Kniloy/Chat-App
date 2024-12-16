@@ -9,9 +9,12 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import Popup from "reactjs-popup";
 import { getAuth, signOut } from "firebase/auth";
+import { useSelector } from "react-redux";
 
 
 const SidebarMenu = () => {
+  const photoURL = useSelector((state)=> state.userDetails.userCredentials.photoURL)
+  console.log(photoURL)
   const auth = getAuth();
   const navigate = useNavigate()
   return (
@@ -30,8 +33,8 @@ const SidebarMenu = () => {
         transition:Flip
       />
       <nav className="flex flex-col items-center gap-[100px]">
-        <div>
-          <img className=" pt-10" src={profilePic} alt="" />
+        <div className="mt-10 w-[100px] ">
+          <img className="rounded-full" src={photoURL ? photoURL: profilePic} alt="" />
         </div>
 
         <ul className="flex flex-col">
