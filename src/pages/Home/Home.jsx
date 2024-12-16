@@ -33,7 +33,7 @@ const Home = () => {
             <div className="md:w-[32%]">
               <FriendList />
             </div>
-            <div className="md:w-[32%]">
+            <div className="md:w-[32%] w-full">
               <UserList />
             </div>
             <div className="md:w-[32%] ">
