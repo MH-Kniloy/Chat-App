@@ -35,14 +35,14 @@ const SidebarMenu = () => {
       <nav className="md:flex md:flex-col items-center gap-[100px] md:static relative">
         <div className="md:mt-10 md:w-[100px] w-[70px] md:h-auto h-[80px] py-3 md:py-0 ps-3 md:ps-0">
           <img
-            className="rounded-full w-full h-full "
+            className="rounded-full md:w-auto md:h-auto w-full h-full "
             src={photoURL ? photoURL : profilePic}
             alt="dp"
           />
         </div>
 
         <ul className="flex md:flex-col md:static absolute top-[20px] left-[70px]">
-          <li className="flex justify-center md:items-start items-center md:py-5 md:mb-7  mx-4 md:mx-0">
+          <li className="flex justify-center md:items-start items-center md:py-5 md:mb-0  mx-4 md:mx-0">
             <NavLink
               to="/Home"
               className={({ isActive }) =>
@@ -54,7 +54,7 @@ const SidebarMenu = () => {
               <VscHome className=" md:text-[50px] text-2xl  cursor-pointer " />
             </NavLink>
           </li>
-          <li className="flex justify-center md:items-start items-center md:p-5 md:mb-7  mx-2 md:mx-0">
+          <li className="flex justify-center md:items-start items-center md:p-5 md:mb-0  mx-2 md:mx-0">
             <NavLink
               to="/Messages"
               className={({ isActive }) =>
@@ -66,7 +66,7 @@ const SidebarMenu = () => {
               <AiOutlineMessage className="  md:text-[50px] text-2xl  cursor-pointer" />
             </NavLink>
           </li>
-          <li className="flex justify-center md:items-start items-center md:p-5 md:mb-7  mx-2 md:mx-0">
+          <li className="flex justify-center md:items-start items-center md:p-5 md:mb-0  mx-2 md:mx-0">
             <NavLink
               to="/Notifications"
               className={({ isActive }) =>
@@ -78,7 +78,7 @@ const SidebarMenu = () => {
               <IoIosNotificationsOutline className="  md:text-[60px] text-[30px]  cursor-pointer" />
             </NavLink>
           </li>
-          <li className="flex justify-center md:items-start items-center md:p-5 md:mb-7 mx-2 md:mx-0">
+          <li className="flex justify-center md:items-start items-center md:p-5 md:mb-0 mx-2 md:mx-0">
             <NavLink
               to="/Settings"
               className={({ isActive }) =>
@@ -95,7 +95,7 @@ const SidebarMenu = () => {
           <Link to="/Login"></Link>
           <Popup
             trigger={
-              <button className="button md:static absolute top-[27px] right-4">
+              <button className="button md:static absolute md:top-0 md:right-0 top-[27px] right-4">
                 <FiLogOut className=" text-white md:text-[50px] text-2xl  cursor-pointer" />
               </button>
             }
