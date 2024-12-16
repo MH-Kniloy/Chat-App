@@ -13,11 +13,12 @@ import { useSelector } from "react-redux";
 
 
 const SidebarMenu = () => {
-  const photoURL = useSelector((state)=> state.userDetails.userCredentials.photoURL)
+  // const photoURL = useSelector((state)=> state.userDetails.userCredentials.photoURL)
+  const photoURL = false
   const auth = getAuth();
   const navigate = useNavigate()
   return (
-    <div className="w-[10%] bg-violet h-[960px] rounded-[20px] md:flex justify-center me-[45px] hidden">
+    <div className="md:w-[10%] w-full bg-violet md:h-[960px] h-[80px] md:rounded-[20px] md:flex justify-center md:me-[45px] md:static fixed top-0 left-0 z-10">
       <ToastContainer
         position="top-center"
         autoClose={3000}
@@ -31,58 +32,62 @@ const SidebarMenu = () => {
         theme="dark"
         transition:Flip
       />
-      <nav className="flex flex-col items-center gap-[100px]">
-        <div className="mt-10 w-[100px] ">
-          <img className="rounded-full" src={photoURL ? photoURL: profilePic} alt="" />
+      <nav className="md:flex md:flex-col items-center gap-[100px] md:static relative">
+        <div className="md:mt-10 md:w-[100px] w-[70px] md:h-auto h-[80px] py-3 md:py-0 ps-3 md:ps-0">
+          <img
+            className="rounded-full w-full h-full "
+            src={photoURL ? photoURL : profilePic}
+            alt="dp"
+          />
         </div>
 
-        <ul className="flex flex-col">
-          <li className="flex justify-center py-5 mb-7">
+        <ul className="flex md:flex-col md:static absolute top-[20px] left-[70px]">
+          <li className="flex justify-center md:items-start items-center md:py-5 md:mb-7  mx-4 md:mx-0">
             <NavLink
               to="/Home"
               className={({ isActive }) =>
                 isActive
-                  ? "bg-white text-violet p-5 rounded-full"
-                  : "text-white "
+                  ? "bg-white text-violet md:p-5 p-2 rounded-full"
+                  : "text-white md:p-5 p-2 rounded-full "
               }
             >
-              <VscHome className=" text-[50px]  cursor-pointer " />
+              <VscHome className=" md:text-[50px] text-2xl  cursor-pointer " />
             </NavLink>
           </li>
-          <li className="flex justify-center p-5 mb-7">
+          <li className="flex justify-center md:items-start items-center md:p-5 md:mb-7  mx-2 md:mx-0">
             <NavLink
               to="/Messages"
               className={({ isActive }) =>
                 isActive
-                  ? "bg-white text-violet p-5 rounded-full"
-                  : "text-white "
+                  ? "bg-white text-violet md:p-5 p-2 rounded-full"
+                  : "text-white md:p-5 p-2 rounded-full"
               }
             >
-              <AiOutlineMessage className="  text-[50px]  cursor-pointer" />
+              <AiOutlineMessage className="  md:text-[50px] text-2xl  cursor-pointer" />
             </NavLink>
           </li>
-          <li className="flex justify-center p-5 mb-7">
+          <li className="flex justify-center md:items-start items-center md:p-5 md:mb-7  mx-2 md:mx-0">
             <NavLink
               to="/Notifications"
               className={({ isActive }) =>
                 isActive
-                  ? "bg-white text-violet p-5 rounded-full"
-                  : "text-white "
+                  ? "bg-white text-violet md:p-5 p-2 rounded-full"
+                  : "text-white md:p-5 p-2 rounded-full"
               }
             >
-              <IoIosNotificationsOutline className="  text-[60px]  cursor-pointer" />
+              <IoIosNotificationsOutline className="  md:text-[60px] text-[30px]  cursor-pointer" />
             </NavLink>
           </li>
-          <li className="flex justify-center p-5 mb-7">
+          <li className="flex justify-center md:items-start items-center md:p-5 md:mb-7 mx-2 md:mx-0">
             <NavLink
               to="/Settings"
               className={({ isActive }) =>
                 isActive
-                  ? "bg-white text-violet p-5 rounded-full"
-                  : "text-white "
+                  ? "bg-white text-violet md:p-5 p-2 rounded-full"
+                  : "text-white md:p-5 p-2 rounded-full"
               }
             >
-              <IoSettingsOutline className=" text-[50px]  cursor-pointer" />
+              <IoSettingsOutline className=" md:text-[50px] text-2xl  cursor-pointer" />
             </NavLink>
           </li>
         </ul>
@@ -90,8 +95,8 @@ const SidebarMenu = () => {
           <Link to="/Login"></Link>
           <Popup
             trigger={
-              <button className="button">
-                <FiLogOut className=" text-white text-[50px]  cursor-pointer" />
+              <button className="button md:static absolute top-[27px] right-4">
+                <FiLogOut className=" text-white md:text-[50px] text-2xl  cursor-pointer" />
               </button>
             }
             modal
@@ -113,15 +118,14 @@ const SidebarMenu = () => {
                     onClick={() => {
                       signOut(auth)
                         .then(() => {
-                          localStorage.clear()
-                          toast.success("Loguot Successfull")
-                          setTimeout(()=>{
-                             navigate("/Login")
-                          }, 4000)
+                          localStorage.clear();
+                          toast.success("Loguot Successfull");
+                          setTimeout(() => {
+                            navigate("/Login");
+                          }, 4000);
                         })
                         .catch((error) => {
                           console.log(error);
-                          
                         });
                     }}
                   >

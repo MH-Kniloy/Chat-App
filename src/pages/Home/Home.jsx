@@ -22,7 +22,7 @@ const Home = () => {
   return (
     <>
       <Container>
-        <section className="md:flex ">
+        <section className="md:flex mt-14 md:mt-0">
           <SidebarMenu />
 
           <div className="md:w-[90%] flex gap-5 flex-wrap">
