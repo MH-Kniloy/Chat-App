@@ -13,8 +13,7 @@ import { useSelector } from "react-redux";
 
 
 const SidebarMenu = () => {
-  // const photoURL = useSelector((state)=> state.userDetails.userCredentials.photoURL)
-  const photoURL = false
+  const photoURL = useSelector((state)=> state.userDetails.userCredentials.photoURL)
   const auth = getAuth();
   const navigate = useNavigate()
   return (
@@ -36,7 +35,7 @@ const SidebarMenu = () => {
         <div className="md:mt-10 md:w-[100px] w-[70px] md:h-auto h-[80px] py-3 md:py-0 ps-3 md:ps-0">
           <img
             className="rounded-full md:w-auto md:h-auto w-full h-full "
-            src={photoURL ? photoURL : profilePic}
+            src={photoURL || profilePic}
             alt="dp"
           />
         </div>
