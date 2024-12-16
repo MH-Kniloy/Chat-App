@@ -13,7 +13,7 @@ const Settings = () => {
   }, []);
   return (
     <Container>
-      <section>
+      <section className="mt-14 md:mt-0">
         <div className="flex">
           <SidebarMenu />
           <div className="text-5xl text-violet font-bold font-nunito text-center w-[90%]">
