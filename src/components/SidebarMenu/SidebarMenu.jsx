@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import profilePic from "../../assets/profile-pic.png";
 import { SlCloudUpload } from "react-icons/sl";
+import { GiCrossedSwords } from "react-icons/gi";
 import { VscHome } from "react-icons/vsc";
 import { FiLogOut } from "react-icons/fi";
 import { AiOutlineMessage } from "react-icons/ai";
@@ -21,7 +22,7 @@ const SidebarMenu = () => {
 
   const handleUpload=()=>{
        setShow(true)
-       
+
   }
   return (
     <div className="md:w-[10%] w-full bg-violet md:h-[960px] h-[80px] md:rounded-[20px] md:flex justify-center md:me-[45px] md:static fixed top-0 left-0 z-10">
@@ -39,15 +40,17 @@ const SidebarMenu = () => {
         transition:Flip
       />
       <nav className="md:flex md:flex-col items-center gap-[100px] md:static relative">
-        <div onClick={handleUpload} className="md:mt-10 md:w-[100px] w-[70px] md:h-auto h-[80px] py-3 md:py-0 ps-3 md:ps-0 relative group cursor-pointer">
+        <div
+          onClick={handleUpload}
+          className="md:mt-10 md:w-[100px] w-[70px] md:h-auto h-[80px] py-3 md:py-0 ps-3 md:ps-0 relative group cursor-pointer"
+        >
           <img
             className="rounded-full md:w-auto md:h-auto w-full h-full z-10"
             src={photoURL || profilePic}
             alt="dp"
           />
-            <SlCloudUpload className="text-4xl font-bold opacity-0 group-hover:opacity-100 text-white absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute left-0 top-0 md:w-[100px] w-[70px] md:h-[100px] h-[80px] rounded-full z-10 group-hover:bg-black group-hover:opacity-50 ">
-          </div>
+          <SlCloudUpload className="text-4xl font-bold opacity-0 group-hover:opacity-100 text-white absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute left-0 top-0 md:w-[100px] w-[70px] md:h-[100px] h-[80px] rounded-full z-10 group-hover:bg-black group-hover:opacity-50 "></div>
         </div>
 
         <ul className="flex md:flex-col md:static absolute top-[20px] left-[70px]">
@@ -155,6 +158,24 @@ const SidebarMenu = () => {
           </Popup>
         </div>
       </nav>
+
+      {show ? (
+        <div className="bg-darkBlueOne h-[500px] w-[800px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-100 transition-transform duration-500 ease-in-out">
+          ddddddddddd
+          <GiCrossedSwords
+            onClick={() => setShow(false)}
+            className="absolute top-[30px] right-[30px] cursor-pointer text-3xl text-white"
+          />
+        </div>
+      ) : (
+        <div className="bg-darkBlueOne h-[500px] w-[800px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-0 transition-transform duration-500 ease-in-out">
+          ddddddddddd
+          <GiCrossedSwords
+            onClick={() => setShow(false)}
+            className="absolute top-[30px] right-[30px] cursor-pointer text-3xl text-white"
+          />
+        </div>
+      )}
     </div>
   );
 };
