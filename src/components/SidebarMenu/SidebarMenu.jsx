@@ -65,7 +65,7 @@ const SidebarMenu = () => {
           onClick={handleUpload}
           className="md:mt-10 md:w-[100px] w-[70px] md:h-auto h-[80px] py-3 md:py-0 ps-3 md:ps-0 relative group cursor-pointer"
         >
-          {show ? (
+          {image ? (
             <div>
               <div className="img-preview w-[100px] h-[100px] rounded-full" />
             </div>
