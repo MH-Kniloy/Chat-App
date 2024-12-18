@@ -65,11 +65,25 @@ const SidebarMenu = () => {
           onClick={handleUpload}
           className="md:mt-10 md:w-[100px] w-[70px] md:h-auto h-[80px] py-3 md:py-0 ps-3 md:ps-0 relative group cursor-pointer"
         >
-          <img
+          {show ? (
+            <div>
+              <div className="img-preview w-[100px] h-[100px] rounded-full" />
+            </div>
+          ) : (
+            <img
+              className="rounded-full md:w-auto md:h-auto w-full h-full z-10"
+              src={photoURL || profilePic}
+              alt="dp"
+            />
+          )}
+          {/* <img
             className="rounded-full md:w-auto md:h-auto w-full h-full z-10"
             src={photoURL || profilePic}
             alt="dp"
           />
+          <div>
+            <div className="img-preview w-[100px] h-[100px] rounded-full" />
+          </div> */}
           <SlCloudUpload className="text-4xl font-bold opacity-0 group-hover:opacity-100 text-white absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2" />
           <div className="absolute left-0 top-0 md:w-[100px] w-[70px] md:h-[100px] h-[80px] rounded-full z-10 group-hover:bg-black group-hover:opacity-50 "></div>
         </div>
@@ -189,7 +203,6 @@ const SidebarMenu = () => {
           />
           <div className="flex flex-col items-center justify-end h-[600px]">
             <div className="w-full pb-4">
-              
               <Cropper
                 ref={cropperRef}
                 style={{ height: 400, width: "100%" }}
