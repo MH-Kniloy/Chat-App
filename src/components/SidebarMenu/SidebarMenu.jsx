@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { createRef, useState } from "react";
 import profilePic from "../../assets/profile-pic.png";
 import { SlCloudUpload } from "react-icons/sl";
 import { GiCrossedSwords } from "react-icons/gi";
@@ -12,6 +12,8 @@ import { ToastContainer, toast } from "react-toastify";
 import Popup from "reactjs-popup";
 import { getAuth, signOut } from "firebase/auth";
 import { useSelector } from "react-redux";
+import Cropper from "react-cropper";
+import "cropperjs/dist/cropper.css";
 
 
 const SidebarMenu = () => {
@@ -24,6 +26,25 @@ const SidebarMenu = () => {
        setShow(true)
 
   }
+
+  const [image, setImage] = useState();
+  const [cropData, setCropData] = useState("");
+  const cropperRef = createRef();
+  const onChange = (e) => {
+    e.preventDefault();
+    let files;
+    if (e.dataTransfer) {
+      files = e.dataTransfer.files;
+    } else if (e.target) {
+      files = e.target.files;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      console.log(reader.result)
+      setImage(reader.result);
+    };
+    reader.readAsDataURL(files[0]);
+  };
   return (
     <div className="md:w-[10%] w-full bg-violet md:h-[960px] h-[80px] md:rounded-[20px] md:flex justify-center md:me-[45px] md:static fixed top-0 left-0 z-10">
       <ToastContainer
@@ -160,17 +181,33 @@ const SidebarMenu = () => {
       </nav>
 
       {show ? (
-        <div className="bg-darkBlueOne text-white font-nunito p-5 h-[500px] w-[800px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-100 transition-transform duration-500 ease-in-out rounded-md">
+        <div className="bg-darkBlueOne text-white font-nunito p-5 h-[700px] w-[1000px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-100 transition-transform duration-500 ease-in-out rounded-md">
           <h3 className="text-5xl text-center">Upload Image</h3>
           <GiCrossedSwords
             onClick={() => setShow(false)}
             className="absolute top-[30px] right-[30px] cursor-pointer text-3xl text-white "
           />
-          <div className="flex flex-col items-center justify-end h-[400px]">
-          <div className="w-full pb-4">
-
-          <input type="file" />
-          </div>
+          <div className="flex flex-col items-center justify-end h-[600px]">
+            <div className="w-full pb-4">
+              
+              <Cropper
+                ref={cropperRef}
+                style={{ height: 400, width: "100%" }}
+                zoomTo={0.5}
+                initialAspectRatio={1}
+                preview=".img-preview"
+                src={image}
+                viewMode={1}
+                minCropBoxHeight={10}
+                minCropBoxWidth={10}
+                background={false}
+                responsive={true}
+                autoCropArea={1}
+                checkOrientation={false} // https://github.com/fengyuanchen/cropperjs/issues/671
+                guides={true}
+              />
+              <input type="file" onChange={onChange} />
+            </div>
             <p className="text-xl px-3 py-2 bg-white text-darkBlueOne rounded-[4px] inline-block font-bold cursor-pointer active:scale-[0.98]">
               Upload
             </p>
