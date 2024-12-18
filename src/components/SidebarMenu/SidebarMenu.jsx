@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 
 
 const SidebarMenu = () => {
-  const photoURL = useSelector((state)=> state.userDetails.userCredentials.photoURL)
+  const photoURL = useSelector((state)=> state.userDetails?.userCredentials?.photoURL)
   const auth = getAuth();
   const navigate = useNavigate()
   return (
