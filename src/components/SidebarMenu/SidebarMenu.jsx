@@ -160,12 +160,21 @@ const SidebarMenu = () => {
       </nav>
 
       {show ? (
-        <div className="bg-darkBlueOne h-[500px] w-[800px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-100 transition-transform duration-500 ease-in-out">
-          ddddddddddd
+        <div className="bg-darkBlueOne text-white font-nunito p-5 h-[500px] w-[800px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-100 transition-transform duration-500 ease-in-out rounded-md">
+          <h3 className="text-5xl text-center">Upload Image</h3>
           <GiCrossedSwords
             onClick={() => setShow(false)}
-            className="absolute top-[30px] right-[30px] cursor-pointer text-3xl text-white"
+            className="absolute top-[30px] right-[30px] cursor-pointer text-3xl text-white "
           />
+          <div className="flex flex-col items-center justify-end h-[400px]">
+          <div className="w-full pb-4">
+
+          <input type="file" />
+          </div>
+            <p className="text-xl px-3 py-2 bg-white text-darkBlueOne rounded-[4px] inline-block font-bold cursor-pointer active:scale-[0.98]">
+              Upload
+            </p>
+          </div>
         </div>
       ) : (
         <div className="bg-darkBlueOne h-[500px] w-[800px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-0 transition-transform duration-500 ease-in-out">
