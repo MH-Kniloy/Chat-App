@@ -403,9 +403,9 @@ if (
           </p>
         </div>
 
-        <div className="md:w-1/2">
+        <div className="md:w-1/2 flex justify-center items-center">
           <img
-            className="w-full h-screen object-cover"
+            className=""
             src={registrationImg}
             alt="registrationImg"
           />

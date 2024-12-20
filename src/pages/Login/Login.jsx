@@ -234,8 +234,8 @@ const Login = () => {
           </p>
         </div>
 
-        <div className="md:w-[40%]">
-          <img className="md:w-screen md:h-screen" src={Loginimg} alt="" />
+        <div className="md:w-[50%] md:flex justify-center items-center ">
+          <img className="" src={Loginimg} alt="" />
         </div>
       </section>
     </>
