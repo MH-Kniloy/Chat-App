@@ -229,8 +229,8 @@ const SidebarMenu = () => {
           </div>
         </div>
       ) : (
-        <div className="bg-darkBlueOne h-[500px] w-[800px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-0 transition-transform duration-500 ease-in-out">
-          ddddddddddd
+        <div className="bg-darkBlueOne h-auto w-[1000px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-0 transition-transform duration-500 ease-in-out">
+          Upload
           <GiCrossedSwords
             onClick={() => setShow(false)}
             className="absolute top-[30px] right-[30px] cursor-pointer text-3xl text-white"
