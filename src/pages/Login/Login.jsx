@@ -9,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { PacmanLoader } from "react-spinners";
 import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getDatabase, ref, set } from "firebase/database";
 import Home from "../Home/Home";
 import { useDispatch } from "react-redux";
 import { userLoginInfo } from "../../features/User/userSlice";
@@ -18,7 +19,7 @@ const Login = () => {
   // for google login firebase 
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
-  
+  const db = getDatabase();
   const handleGoogleLogin =()=>{
     signInWithPopup(auth, provider)
       .then((result) => {
@@ -37,6 +38,13 @@ const Login = () => {
            navigate("/Home")
         }, 4000)
         setSpinner(true);
+      }).then(()=>{
+        const auth = getAuth()
+        set(ref(db, "users/" + auth.currentUser.uid ), {
+          username: auth.currentUser.displayName,
+          email: auth.currentUser.email,
+          profile_picture: auth.currentUser.photoURL,
+        });
       })
       .catch((error) => {
         // Handle Errors here.
