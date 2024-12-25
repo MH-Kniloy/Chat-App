@@ -87,7 +87,7 @@ const SidebarMenu = () => {
           <SlCloudUpload className="text-4xl font-bold opacity-0 group-hover:opacity-100 text-white absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2" />
           <div className="absolute left-0 top-0 md:w-[100px] w-[70px] md:h-[100px] h-[80px] rounded-full z-10 group-hover:bg-black group-hover:opacity-50 "></div>
         </div>
-        <p className="text-white w-[9.5%] text-[18px] font-bold font-opnesans absolute top-[185px] left-[30px] mb-[400px] text-center">
+        <p className="text-white w-[9.5%] text-[18px] font-bold font-opnesans absolute top-[185px] left-[30px] mb-[400px] text-center md:block hidden">
           {user.displayName}
         </p>
         <ul className="flex md:flex-col md:static absolute top-[20px] left-[70px]">

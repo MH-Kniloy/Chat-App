@@ -12,6 +12,7 @@ import {
   sendEmailVerification,
   updateProfile,
 } from "firebase/auth";
+import { getDatabase, ref, set } from "firebase/database";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CircleLoader } from "react-spinners";
@@ -143,10 +144,18 @@ if (
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-
+        
       // Set the displayName for the user
       updateProfile(user, {
         displayName: fullName, // Assuming fullName is the input value for the user's full name
+      }).then(()=>{
+         const db = getDatabase();
+         console.log(db);
+        set(ref(db, "users/" + user.uid), {
+          username: user.displayName,
+          email: user.email,
+          profile_picture: user.photoURL?user.photoURL:"",
+        })
       })
         .then(() => {
           sendEmailVerification(user).then(() => {
