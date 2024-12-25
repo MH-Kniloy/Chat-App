@@ -3,8 +3,11 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import UserListComp from "../UserListComp/UserListComp";
 import { userInfo } from "../../context/UserContext/UserContext";
 import { getDatabase, ref, onValue } from "firebase/database";
+import { getAuth } from "firebase/auth";
 const UserList = () => {
   const userDetails = useContext(userInfo);
+  const auth = getAuth()
+  console.log(auth)
   const db = getDatabase();
   const dataRef = ref(db, "users/");
   const [data, setData] = useState([])
@@ -13,7 +16,9 @@ const UserList = () => {
     onValue(dataRef, (snapshot) => {
       const data = snapshot.val();
       const dataArr = Object.values(data);
-      setData(dataArr);
+      const filteredArr = dataArr.filter(filter => filter.email !== auth.currentUser.email)
+
+      setData(filteredArr);
     });
   },[])
 
