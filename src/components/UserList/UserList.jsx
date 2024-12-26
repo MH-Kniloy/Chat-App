@@ -1,25 +1,28 @@
 import React, { useContext, useEffect, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import UserListComp from "../UserListComp/UserListComp";
 import { userInfo } from "../../context/UserContext/UserContext";
 import { getDatabase, ref, onValue } from "firebase/database";
 import { getAuth } from "firebase/auth";
 const UserList = () => {
-  const userDetails = useContext(userInfo);
+  // const userDetails = useContext(userInfo);
   const auth = getAuth()
-  console.log(auth)
   const db = getDatabase();
   const dataRef = ref(db, "users/");
   const [data, setData] = useState([])
-  console.log(data)
+  const [loading, setLoading] = useState(false)
   useEffect(()=>{
+    setLoading(true)
     onValue(dataRef, (snapshot) => {
       const data = snapshot.val();
       const dataArr = Object.values(data);
       const filteredArr = dataArr.filter(filter => filter.email !== auth.currentUser.email)
 
       setData(filteredArr);
-    });
+      setLoading(false)
+    })
   },[])
 
   return (
@@ -28,7 +31,6 @@ const UserList = () => {
         <h3 className="font-poppins font-semibold text-xl ">User List</h3>
         <BsThreeDotsVertical className="text-2xl text-violet cursor-pointer " />
       </div>
-
       <div>
         {/* {userDetails.map((items, idx) => (
           <UserListComp
@@ -47,13 +49,20 @@ const UserList = () => {
           
         })
         } */}
-        {data.map((items, idx)=>(
-           <UserListComp
-             key={idx}
-             image={items.profile_picture}
-             name={items.username}
-           />
-        ))}
+
+        {loading ? (
+          <Skeleton
+            count={10} 
+          />
+        ) : (
+          data.map((items, idx) => (
+            <UserListComp
+              key={idx}
+              image={items.profile_picture}
+              name={items.username}
+            />
+          ))
+        )}
       </div>
     </div>
   );
