@@ -13,6 +13,10 @@ const UserList = () => {
   const dataRef = ref(db, "users/");
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
+  const handleFreindRequest = ()=>{
+    console.log("nice");
+    
+  }
   useEffect(()=>{
     setLoading(true)
     onValue(dataRef, (snapshot) => {
@@ -60,6 +64,7 @@ const UserList = () => {
               key={idx}
               image={items.profile_picture}
               name={items.username}
+              friendRequest={handleFreindRequest}
             />
           ))
         )}
