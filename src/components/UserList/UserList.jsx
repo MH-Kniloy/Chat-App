@@ -13,8 +13,9 @@ const UserList = () => {
   const dataRef = ref(db, "users/");
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
+  const [reqSent, setReqSent] = useState(false)
   const handleFreindRequest = ()=>{
-    console.log("nice");
+    setReqSent(!reqSent)
     
   }
   useEffect(()=>{
@@ -65,6 +66,7 @@ const UserList = () => {
               image={items.profile_picture}
               name={items.username}
               friendRequest={handleFreindRequest}
+              reqSent={reqSent}
             />
           ))
         )}
