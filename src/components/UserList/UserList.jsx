@@ -13,10 +13,10 @@ const UserList = () => {
   const dataRef = ref(db, "users/");
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
-  const [reqSent, setReqSent] = useState(false)
-  const handleFreindRequest = ()=>{
-    setReqSent(!reqSent)
-    
+  const [reqSent, setReqSent] = useState()
+  const handleFreindRequest = (items)=>{
+    setReqSent(items.email)  
+    console.log(items,"nice");
   }
   useEffect(()=>{
     setLoading(true)
@@ -67,6 +67,8 @@ const UserList = () => {
               name={items.username}
               friendRequest={handleFreindRequest}
               reqSent={reqSent}
+              items={items}
+              btn={reqSent == items.email ? "-" :"+"}
             />
           ))
         )}
