@@ -4,7 +4,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import UserListComp from "../UserListComp/UserListComp";
 import { userInfo } from "../../context/UserContext/UserContext";
-import { getDatabase, ref, onValue } from "firebase/database";
+import { getDatabase, ref, onValue, push, set } from "firebase/database";
 import { getAuth } from "firebase/auth";
 const UserList = () => {
   // const userDetails = useContext(userInfo);
@@ -16,6 +16,14 @@ const UserList = () => {
   const [reqSent, setReqSent] = useState()
   const handleFreindRequest = (items)=>{
     setReqSent(items.email)  
+    set(push(ref(db, "friendRequest/")), {
+      senderName: auth.currentUser.displayName,
+      senderEmail: auth.currentUser.email,
+      senderPhoto: auth.currentUser.photoURL,
+      recieverName: items.username,
+      recieverEmail: items.email,
+      recieverPhoto: items.profile_picture,
+    });
     console.log(items,"nice");
   }
   useEffect(()=>{
