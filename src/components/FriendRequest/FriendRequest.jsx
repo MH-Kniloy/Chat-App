@@ -13,16 +13,21 @@ const FriendRequest = () => {
   const db = getDatabase();
   const dataRef = ref(db, "friendRequest/");
   const [data, setData] = useState([]);
+  const [noRequest, setNoRequest] = useState(false);
   useEffect(() => {
     onValue(dataRef, (snapshot) => {
       const data = snapshot.val();
       const dataArr = Object.values(data);
-      // const filteredArr = dataArr.filter(
-      //   (filter) => filter.email !== auth.currentUser.email
-      // );
+      const filteredArr = dataArr.filter(
+        (filter) => filter.senderEmail !== auth.currentUser.email
+      );
 
-      setData(dataArr);
-
+      setData(filteredArr);
+     const recieverEmail = filteredArr.some(item => item.recieverEmail === auth.currentUser.email)
+     if(recieverEmail){
+      setNoRequest(true);
+     }
+    
     });
   }, []);
   console.log(data)
@@ -33,16 +38,22 @@ const FriendRequest = () => {
         <BsThreeDotsVertical className="text-2xl text-violet cursor-pointer " />
       </div>
 
-      <div>
-        {data.map((items, idx) => (
-          <FriendRequestComp
-            key={idx}
-            image={items.senderPhoto}
-            name={items.senderName}
-            message={items.message}
-          />
-        ))}
-      </div>
+      {noRequest ? (
+        <div>
+          {data.map(
+            (items, idx) =>
+              items.recieverEmail == auth.currentUser.email && (
+                <FriendRequestComp
+                  key={idx}
+                  image={items.senderPhoto}
+                  name={items.senderName}
+                />
+              )
+          )}
+        </div>
+      ) : (
+        <p className="font-opnesans text-2xl font-semibold text-center text-darkBlueOne">You have no friend request</p>
+      )}
     </div>
   );
 };
