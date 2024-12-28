@@ -1,11 +1,31 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import FriendRequestComp from "../FriendRequestComp/FriendRequestComp";
 import { userInfo } from "../../context/UserContext/UserContext";
+import { getDatabase, ref, onValue,} from "firebase/database";
+import { getAuth } from "firebase/auth";
 
 const FriendRequest = () => {
-  const requestDetails = useContext(userInfo)
-  const slice=requestDetails.slice(0, 4)
+  const requestDetails = useContext(userInfo);
+  const slice = requestDetails.slice(0, 4);
+
+  const auth = getAuth();
+  const db = getDatabase();
+  const dataRef = ref(db, "friendRequest/");
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    onValue(dataRef, (snapshot) => {
+      const data = snapshot.val();
+      const dataArr = Object.values(data);
+      // const filteredArr = dataArr.filter(
+      //   (filter) => filter.email !== auth.currentUser.email
+      // );
+
+      setData(dataArr);
+
+    });
+  }, []);
+  console.log(data)
   return (
     <div className="p-5 pt-0 rounded-[20px] shadow-custom mt-9 h-[445px] overflow-auto relative">
       <div className="flex justify-between mb-3 pt-5 bg-white sticky top-[0px] left-0 h-[70px] w-full">
@@ -14,11 +34,11 @@ const FriendRequest = () => {
       </div>
 
       <div>
-        {slice.map((items, idx) => (
+        {data.map((items, idx) => (
           <FriendRequestComp
-          key={idx}
-            image={items.image}
-            name={items.name}
+            key={idx}
+            image={items.senderPhoto}
+            name={items.senderName}
             message={items.message}
           />
         ))}
