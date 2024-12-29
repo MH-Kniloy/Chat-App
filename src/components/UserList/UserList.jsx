@@ -4,39 +4,62 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import UserListComp from "../UserListComp/UserListComp";
 import { userInfo } from "../../context/UserContext/UserContext";
-import { getDatabase, ref, onValue, push, set } from "firebase/database";
+import {
+  getDatabase,
+  ref,
+  onValue,
+  push,
+  set,
+  remove,
+  get,
+} from "firebase/database";
 import { getAuth } from "firebase/auth";
 const UserList = () => {
   // const userDetails = useContext(userInfo);
-  const auth = getAuth()
+  const auth = getAuth();
   const db = getDatabase();
-  const [userLists, setuserLists] = useState([])
-  const [loading, setLoading] = useState(false)
- 
-  const handleFreindRequest = (items)=>{
-      
-    set(push(ref(db, "friendRequest/" )), {
-      senderName: auth.currentUser.displayName,
-      senderEmail: auth.currentUser.email,
-      senderPhoto: auth.currentUser.photoURL,
-      recieverName: items.username,
-      recieverEmail: items.email,
-      recieverPhoto: items.profile_picture,
-    });
+  const [userLists, setuserLists] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  }
+  const handleFreindRequest = (items) => {
+    let requestExists = false
+
+    get(ref(db, "friendRequest/"))
+    .then((snapshot)=>{
+      snapshot.forEach((request) => {
+        if (items.email === request.val().recieverEmail) {
+          let requestKey = request.key;
+          requestExists = true;
+          remove(ref(db, `friendRequest/${requestKey}`));
+        }
+      });
+
+      if (!requestExists) {
+          set(push(ref(db, "friendRequest/")), {
+          senderName: auth.currentUser.displayName,
+          senderEmail: auth.currentUser.email,
+          senderPhoto: auth.currentUser.photoURL,
+          recieverName: items.username,
+          recieverEmail: items.email,
+          recieverPhoto: items.profile_picture,
+        });
+      }
+    })
+    
+  };
+
   useEffect(() => {
     setLoading(true);
 
     onValue(ref(db, "users/"), (snapshot) => {
-      let arr = []
-      snapshot.forEach((user)=>{
-        if(auth.currentUser.email!==user.val().email){
-          arr.push(user.val())
+      let arr = [];
+      snapshot.forEach((user) => {
+        if (auth.currentUser.email !== user.val().email) {
+          arr.push(user.val());
         }
-      })
-      setuserLists(arr)
-      setLoading(false)
+      });
+      setuserLists(arr);
+      setLoading(false);
     });
 
     // onValue(ref(db, "users/"), (snapshot) => {
@@ -59,24 +82,21 @@ const UserList = () => {
       </div>
       {
         <div>
-
-        {loading ? (
-          <Skeleton
-            count={10} 
-          />
-        ) : (
-          userLists.map((items, idx) => (
-            <UserListComp
-              key={idx}
-              image={items.profile_picture}
-              name={items.username}
-              friendRequest={handleFreindRequest}
-              items={items}
-              btn={"+"}
-            />
-          ))
-        )}
-      </div>
+          {loading ? (
+            <Skeleton count={10} />
+          ) : (
+            userLists.map((items, idx) => (
+              <UserListComp
+                key={idx}
+                image={items.profile_picture}
+                name={items.username}
+                friendRequest={handleFreindRequest}
+                items={items}
+                btn={"+"}
+              />
+            ))
+          )}
+        </div>
       }
     </div>
   );
