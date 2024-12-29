@@ -10,13 +10,12 @@ const UserList = () => {
   // const userDetails = useContext(userInfo);
   const auth = getAuth()
   const db = getDatabase();
-  const dataRef = ref(db, "users/");
-  const [data, setData] = useState([])
+  const [userLists, setuserLists] = useState([])
   const [loading, setLoading] = useState(false)
-  const [reqSent, setReqSent] = useState()
+ 
   const handleFreindRequest = (items)=>{
-    setReqSent(items.email)  
-    set(push(ref(db, "friendRequest/")), {
+      
+    set(push(ref(db, "friendRequest/" )), {
       senderName: auth.currentUser.displayName,
       senderEmail: auth.currentUser.email,
       senderPhoto: auth.currentUser.photoURL,
@@ -24,19 +23,33 @@ const UserList = () => {
       recieverEmail: items.email,
       recieverPhoto: items.profile_picture,
     });
-    console.log(items,"nice");
-  }
-  useEffect(()=>{
-    setLoading(true)
-    onValue(dataRef, (snapshot) => {
-      const data = snapshot.val();
-      const dataArr = Object.values(data);
-      const filteredArr = dataArr.filter(filter => filter.email !== auth.currentUser.email)
 
-      setData(filteredArr);
+  }
+  useEffect(() => {
+    setLoading(true);
+
+    onValue(ref(db, "users/"), (snapshot) => {
+      let arr = []
+      snapshot.forEach((user)=>{
+        if(auth.currentUser.email!==user.val().email){
+          arr.push(user.val())
+        }
+      })
+      setuserLists(arr)
       setLoading(false)
-    })
-  },[])
+    });
+
+    // onValue(ref(db, "users/"), (snapshot) => {
+    //   const data = snapshot.val();
+    //   const dataArr = Object.values(data);
+    //   const filteredArr = dataArr.filter(
+    //     (filter) => filter.email !== auth.currentUser.email
+    //   );
+
+    //   setData(filteredArr);
+    //   setLoading(false);
+    // });
+  }, []);
 
   return (
     <div className="p-5 pt-0 rounded-[20px] shadow-custom h-[450px] overflow-auto relative ">
@@ -44,43 +57,27 @@ const UserList = () => {
         <h3 className="font-poppins font-semibold text-xl ">User List</h3>
         <BsThreeDotsVertical className="text-2xl text-violet cursor-pointer " />
       </div>
-      <div>
-        {/* {userDetails.map((items, idx) => (
-          <UserListComp
-            key={idx}
-            image={items.image}
-            name={items.name}
-            time={items.time}
-          />
-        ))} */}
-        {/* {
-        onValue(dataRef, (snapshot) => {
-          const data = snapshot.val()
-          const dataArr = Object.values(data)
-          console.log(dataArr)
-          
-          
-        })
-        } */}
+      {
+        <div>
 
         {loading ? (
           <Skeleton
             count={10} 
           />
         ) : (
-          data.map((items, idx) => (
+          userLists.map((items, idx) => (
             <UserListComp
               key={idx}
               image={items.profile_picture}
               name={items.username}
               friendRequest={handleFreindRequest}
-              reqSent={reqSent}
               items={items}
-              btn={reqSent == items.email ? "-" :"+"}
+              btn={"+"}
             />
           ))
         )}
       </div>
+      }
     </div>
   );
 };

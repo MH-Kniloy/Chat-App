@@ -16,8 +16,12 @@ const Notifications = () => {
       <section className="mt-14 md:mt-0">
         <div className="flex justify-center md:justify-start">
           <SidebarMenu />
-          <div className="text-5xl text-violet font-bold font-nunito text-center w-[90%] ">
+          <div className="flex flex-col items-center w-full">
+
+          <div className="text-5xl text-violet font-bold font-nunito text-center w-[90%] mb-10">
             Notifications
+          </div>
+          <h3 className="w-full rounded-[15px] bg-slate-200 py-6 text-2xl text-darkBlueOne font-opnesans font-semibold text-center">You have no Notifications</h3>
           </div>
         </div>
       </section>
