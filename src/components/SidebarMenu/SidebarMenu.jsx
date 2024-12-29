@@ -124,7 +124,11 @@ const SidebarMenu = () => {
                   : "text-white md:p-5 p-2 rounded-full"
               }
             >
-              <IoIosNotificationsOutline className="  md:text-[60px] text-[30px]  cursor-pointer" />
+              <div className="relative">
+                <IoIosNotificationsOutline className="  md:text-[60px] text-[30px]  cursor-pointer" />
+                <p className="bg-red-500 w-4 h-4 rounded-full animate-ping absolute top-[10px] right-[10px]"></p>
+                <p className="bg-red-500 w-4 h-4 rounded-full absolute top-[10px] right-[10px]"></p>
+              </div>
             </NavLink>
           </li>
           <li className="flex justify-center md:items-start items-center md:p-5 md:mb-0 mx-2 md:mx-0">

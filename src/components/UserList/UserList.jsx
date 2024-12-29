@@ -22,29 +22,40 @@ const UserList = () => {
   const [loading, setLoading] = useState(false);
 
   const handleFreindRequest = (items) => {
-    let requestExists = false
 
-    get(ref(db, "friendRequest/"))
-    .then((snapshot)=>{
-      snapshot.forEach((request) => {
-        if (items.email === request.val().recieverEmail) {
-          let requestKey = request.key;
-          requestExists = true;
-          remove(ref(db, `friendRequest/${requestKey}`));
-        }
-      });
+   set(push(ref(db, "friendRequest/")), {
+     senderName: auth.currentUser.displayName,
+     senderEmail: auth.currentUser.email,
+     senderPhoto: auth.currentUser.photoURL,
+     recieverName: items.username,
+     recieverEmail: items.email,
+     recieverPhoto: items.profile_picture,
+   });
 
-      if (!requestExists) {
-          set(push(ref(db, "friendRequest/")), {
-          senderName: auth.currentUser.displayName,
-          senderEmail: auth.currentUser.email,
-          senderPhoto: auth.currentUser.photoURL,
-          recieverName: items.username,
-          recieverEmail: items.email,
-          recieverPhoto: items.profile_picture,
-        });
-      }
-    })
+    // let requestExists = false
+
+    // get(ref(db, "friendRequest/"))
+    // .then((snapshot)=>{
+    //   snapshot.forEach((request) => {
+    //     if (items.email === request.val().recieverEmail) {
+
+    //       let requestKey = request.key;
+    //       requestExists = true;
+    //       // setPlusMinus(request.val().recieverEmail);
+    //       remove(ref(db, `friendRequest/${requestKey}`));
+    //     }
+    //   });
+    // })
+    // if (!requestExists) {
+    //   set(push(ref(db, "friendRequest/")), {
+    //     senderName: auth.currentUser.displayName,
+    //     senderEmail: auth.currentUser.email,
+    //     senderPhoto: auth.currentUser.photoURL,
+    //     recieverName: items.username,
+    //     recieverEmail: items.email,
+    //     recieverPhoto: items.profile_picture,
+    //   });
+    // }
     
   };
 
@@ -62,16 +73,6 @@ const UserList = () => {
       setLoading(false);
     });
 
-    // onValue(ref(db, "users/"), (snapshot) => {
-    //   const data = snapshot.val();
-    //   const dataArr = Object.values(data);
-    //   const filteredArr = dataArr.filter(
-    //     (filter) => filter.email !== auth.currentUser.email
-    //   );
-
-    //   setData(filteredArr);
-    //   setLoading(false);
-    // });
   }, []);
 
   return (
