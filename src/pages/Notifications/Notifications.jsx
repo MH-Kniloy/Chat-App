@@ -13,7 +13,9 @@ const Notifications = () => {
       const db = getDatabase();
       const [notifications, setNotifications]=useState([])
       const [absentNotifications, setAbsentNotifications]=useState(false)
-
+      const [alert, setAlert]=useState(false)
+      console.log(notifications)
+      localStorage.setItem("alert", JSON.stringify(alert));
     useEffect(() => {
       if (!reduxData) {
         navigate("/Login");
@@ -25,10 +27,12 @@ const Notifications = () => {
               if(auth.currentUser.email===request.val().recieverEmail){
                 arr.push(request.val())
                 setAbsentNotifications(true)
+                setAlert(true)
               }
             })
             setNotifications(arr)
-            });
+            
+          });
       
     },[]);
   return (

@@ -16,13 +16,17 @@ import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 
 const SidebarMenu = () => {
-  const user = useSelector(
-    (user) => user.userDetails.userCredentials
-  );
+  const user = useSelector((user) => user.userDetails.userCredentials);
   const auth = getAuth();
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
-
+  const alert = localStorage.getItem("alert");
+  console.log(alert)
+  const removeAlert = ()=>{
+    localStorage.setItem("alert", JSON.stringify(false))
+    console.log("nice")
+    
+  }
   const handleUpload = () => {
     setShow(true);
   };
@@ -124,10 +128,18 @@ const SidebarMenu = () => {
                   : "text-white md:p-5 p-2 rounded-full"
               }
             >
-              <div className="relative">
+              <div onClick={removeAlert} className="relative">
                 <IoIosNotificationsOutline className="  md:text-[60px] text-[30px]  cursor-pointer" />
-                <p className="bg-red-500 w-4 h-4 rounded-full animate-ping absolute top-[10px] right-[10px]"></p>
-                <p className="bg-red-500 w-4 h-4 rounded-full absolute top-[10px] right-[10px]"></p>
+                <p
+                  className={`bg-red-500 w-4 h-4 rounded-full animate-ping absolute top-[10px] right-[10px] ${
+                    alert === true ? "opacity-100" : "opacity-0"
+                  } `}
+                ></p>
+                <p
+                  className={`bg-red-500 w-4 h-4 rounded-full absolute top-[10px] right-[10px] ${
+                    alert === true ? "opacity-100" : "opacity-0"
+                  } `}
+                ></p>
               </div>
             </NavLink>
           </li>

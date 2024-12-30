@@ -12,6 +12,7 @@ import {
   set,
   remove,
   get,
+  off,
 } from "firebase/database";
 import { getAuth } from "firebase/auth";
 const UserList = () => {
@@ -23,39 +24,14 @@ const UserList = () => {
 
   const handleFreindRequest = (items) => {
 
-   set(push(ref(db, "friendRequest/")), {
-     senderName: auth.currentUser.displayName,
-     senderEmail: auth.currentUser.email,
-     senderPhoto: auth.currentUser.photoURL,
-     recieverName: items.username,
-     recieverEmail: items.email,
-     recieverPhoto: items.profile_picture,
-   });
-
-    // let requestExists = false
-
-    // get(ref(db, "friendRequest/"))
-    // .then((snapshot)=>{
-    //   snapshot.forEach((request) => {
-    //     if (items.email === request.val().recieverEmail) {
-
-    //       let requestKey = request.key;
-    //       requestExists = true;
-    //       // setPlusMinus(request.val().recieverEmail);
-    //       remove(ref(db, `friendRequest/${requestKey}`));
-    //     }
-    //   });
-    // })
-    // if (!requestExists) {
-    //   set(push(ref(db, "friendRequest/")), {
-    //     senderName: auth.currentUser.displayName,
-    //     senderEmail: auth.currentUser.email,
-    //     senderPhoto: auth.currentUser.photoURL,
-    //     recieverName: items.username,
-    //     recieverEmail: items.email,
-    //     recieverPhoto: items.profile_picture,
-    //   });
-    // }
+    set(push(ref(db, "friendRequest/")), {
+      senderName: auth.currentUser.displayName,
+      senderEmail: auth.currentUser.email,
+      senderPhoto: auth.currentUser.photoURL,
+      recieverName: items.username,
+      recieverEmail: items.email,
+      recieverPhoto: items.profile_picture,
+    });
     
   };
 
