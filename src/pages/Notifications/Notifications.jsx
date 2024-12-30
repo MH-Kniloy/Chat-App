@@ -28,7 +28,7 @@ const Notifications = () => {
                 arr.push(request.val())
                 setAbsentNotifications(true)
                 setAlert(true)
-              }
+              } 
             })
             setNotifications(arr)
             

@@ -20,8 +20,8 @@ const SidebarMenu = () => {
   const auth = getAuth();
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
-  const alert = localStorage.getItem("alert");
-  console.log(alert)
+  const alert = JSON.parse(localStorage.getItem("alert"));
+  console.log(alert, 'nive')
   const removeAlert = ()=>{
     localStorage.setItem("alert", JSON.stringify(false))
     console.log("nice")
@@ -132,12 +132,12 @@ const SidebarMenu = () => {
                 <IoIosNotificationsOutline className="  md:text-[60px] text-[30px]  cursor-pointer" />
                 <p
                   className={`bg-red-500 w-4 h-4 rounded-full animate-ping absolute top-[10px] right-[10px] ${
-                    alert === true ? "opacity-100" : "opacity-0"
+                    alert ? "opacity-100" : "opacity-0"
                   } `}
                 ></p>
                 <p
                   className={`bg-red-500 w-4 h-4 rounded-full absolute top-[10px] right-[10px] ${
-                    alert === true ? "opacity-100" : "opacity-0"
+                    alert ? "opacity-100" : "opacity-0"
                   } `}
                 ></p>
               </div>

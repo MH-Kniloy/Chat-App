@@ -31,7 +31,7 @@ const UserList = () => {
       recieverName: items.username,
       recieverEmail: items.email,
       recieverPhoto: items.profile_picture,
-    });
+    })
     
   };
 
