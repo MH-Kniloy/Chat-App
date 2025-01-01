@@ -21,7 +21,8 @@ const UserList = () => {
   const db = getDatabase();
   const [userLists, setuserLists] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const [friendRequest, setFriendrequest] = useState([]);
+  // for sending friend request 
   const handleFreindRequest = (items) => {
 
     set(push(ref(db, "friendRequest/")), {
@@ -35,6 +36,7 @@ const UserList = () => {
     
   };
 
+  // for userlist 
   useEffect(() => {
     setLoading(true);
 
@@ -50,6 +52,20 @@ const UserList = () => {
     });
 
   }, []);
+
+  // for concating sender receiver email and determining what happens after that 
+    useEffect(() => {
+        onValue(ref(db, "friendRequest/"), (snapshot) => {
+        let arr = []
+        snapshot.forEach((request)=>{
+          
+          arr.push(request.val().recieverEmail+request.val().senderEmail)
+        })
+        setFriendrequest(arr)
+        });
+  
+      
+    }, []);
 
   return (
     <div className="p-5 pt-0 rounded-[20px] shadow-custom h-[450px] overflow-auto relative ">

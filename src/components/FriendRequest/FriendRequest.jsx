@@ -26,22 +26,7 @@ const FriendRequest = () => {
       setFriendrequest(arr)
       });
 
-    /*
-    onValue(dataRef, (snapshot) => {
-      const data = snapshot.val();
-      const dataArr = Object.values(data);
-      const filteredArr = dataArr.filter(
-        (filter) => filter.senderEmail !== auth.currentUser.email
-      );
-
-      setData(filteredArr);
-     const recieverEmail = filteredArr.some(item => item.recieverEmail === auth.currentUser.email)
-     if(recieverEmail){
-      setNoRequest(true);
-     }
     
-    });
-    */
   }, []);
   return (
     <div className="p-5 pt-0 rounded-[20px] shadow-custom mt-9 h-[445px] overflow-auto relative">
