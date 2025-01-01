@@ -29,7 +29,7 @@ const FriendRequest = () => {
     
   }, []);
 
-  const handleFriend = (item)=>{
+  const handleFriend = (items)=>{
 
   }
   return (
