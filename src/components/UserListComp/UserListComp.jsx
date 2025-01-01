@@ -22,7 +22,7 @@ const UserListComp = ({ image, name, handleFriendRequest, friendRequestArr, frie
           {
           friendListArr.includes(auth.currentUser.email + items.email) ||
           friendListArr.includes(items.email + auth.currentUser.email) ?
-          <p className="text-white text-[24px] font-poppins font-semibold bg-violet px-3 py-1 cursor-pointer active:scale-[0.95] rounded-[5px]"
+          <p className="text-white text-[20px] font-poppins font-medium bg-violet px-3 py-1 rounded-[5px]"
             >
               Friends
             </p>
