@@ -6,7 +6,7 @@ import { getAuth } from 'firebase/auth';
 import { getDatabase, onValue, ref } from 'firebase/database';
 
 const FriendList = () => {
-  const friendDetails =useContext(userInfo)
+  // const friendDetails =useContext(userInfo)
    const auth = getAuth();
   const db = getDatabase();
   const [friendList, setFriendList] = useState([]);
@@ -14,10 +14,16 @@ const FriendList = () => {
    useEffect(() => {
           onValue(ref(db, "friends/"), (snapshot) => {
           let arr = []
-          snapshot.forEach((friend)=>{
-            
-            arr.push(friend.val())
-          })
+          
+          snapshot.forEach((friend) => {
+           if (
+             friend.val().senderEmail === auth.currentUser.email ||
+             friend.val().recieverEmail === auth.currentUser.email
+           ){
+
+             arr.push(friend.val());
+           }
+          });
           setFriendList(arr)
           });
     

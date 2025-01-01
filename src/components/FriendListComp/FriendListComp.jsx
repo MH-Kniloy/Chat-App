@@ -9,6 +9,7 @@ const FriendListComp = ({ image, name,  }) => {
       </div>
       <div className="flex w-full justify-between">
         <div>
+          
           <h4 className="font-poppins text-[18px] font-semibold">{name}</h4>
           
         </div>
