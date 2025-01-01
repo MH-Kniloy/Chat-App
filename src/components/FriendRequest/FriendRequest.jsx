@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import FriendRequestComp from "../FriendRequestComp/FriendRequestComp";
 import { userInfo } from "../../context/UserContext/UserContext";
-import { getDatabase, ref, onValue,} from "firebase/database";
+import { getDatabase, ref, onValue, set, push, remove,} from "firebase/database";
 import { getAuth } from "firebase/auth";
 
 const FriendRequest = () => {
@@ -19,7 +19,7 @@ const FriendRequest = () => {
       let arr = []
       snapshot.forEach((request)=>{
         if(auth.currentUser.email===request.val().recieverEmail){
-          arr.push(request.val())
+          arr.push({...request.val(), userId:request.key})
           setNoRequest(true)
         }
       })
@@ -30,7 +30,11 @@ const FriendRequest = () => {
   }, []);
 
   const handleFriend = (items)=>{
-
+     set(push(ref(db, "friends/")), {
+          ...items
+        }).then(()=>{
+          remove(ref(db, `friendRequest/${items.userId}`))
+        })
   }
   return (
     <div className="p-5 pt-0 rounded-[20px] shadow-custom mt-9 h-[445px] overflow-auto relative">
