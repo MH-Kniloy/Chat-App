@@ -22,6 +22,7 @@ const UserList = () => {
   const [userLists, setuserLists] = useState([]);
   const [loading, setLoading] = useState(false);
   const [friendRequest, setFriendrequest] = useState([]);
+  const [friendList, setFriendList] = useState([]);
   // for sending friend request 
   const handleFreindRequest = (items) => {
 
@@ -67,6 +68,21 @@ const UserList = () => {
       
     }, []);
 
+    // for friendList 
+
+    useEffect(() => {
+        onValue(ref(db, "friends/"), (snapshot) => {
+        let arr = []
+        snapshot.forEach((friend)=>{
+          
+          arr.push(friend.val().recieverEmail+friend.val().senderEmail)
+        })
+        setFriendList(arr)
+        });
+  
+      
+    }, []);
+
   return (
     <div className="p-5 pt-0 rounded-[20px] shadow-custom h-[450px] overflow-auto relative ">
       <div className="flex justify-between mb-3 pt-5 bg-white sticky top-[0px] left-0 h-[70px] w-full">
@@ -86,7 +102,7 @@ const UserList = () => {
                 handleFriendRequest={handleFreindRequest}
                 friendRequestArr={friendRequest}
                 items={items}
-                
+                friendListArr={friendList}
               />
             ))
           )}

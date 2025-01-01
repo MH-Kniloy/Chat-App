@@ -4,7 +4,7 @@ import Skeleton from 'react-loading-skeleton';
 import "react-loading-skeleton/dist/skeleton.css";
 import { getAuth } from 'firebase/auth';
 
-const UserListComp = ({ image, name, handleFriendRequest, friendRequestArr, items }) => {
+const UserListComp = ({ image, name, handleFriendRequest, friendRequestArr, friendListArr, items }) => {
   const auth = getAuth();
   return (
     <div className="pe-3 pb-4 mb-4 border-b-[1px] border-gray-400 border-opacity-80 flex gap-4 items-center last:border-none">
@@ -19,11 +19,17 @@ const UserListComp = ({ image, name, handleFriendRequest, friendRequestArr, item
           </h5>
         </div>
         <div className="text-center">
-          {friendRequestArr.includes(auth.currentUser.email + items.email) ||
+          {
+          friendListArr.includes(auth.currentUser.email + items.email) ||
+          friendListArr.includes(items.email + auth.currentUser.email) ?
+          <p className="text-white text-[24px] font-poppins font-semibold bg-violet px-3 py-1 cursor-pointer active:scale-[0.95] rounded-[5px]"
+            >
+              Friends
+            </p>
+            :
+          friendRequestArr.includes(auth.currentUser.email + items.email) ||
           friendRequestArr.includes(items.email + auth.currentUser.email) ? (
-            <p
-              
-              className="text-white text-[24px] font-poppins font-semibold bg-violet px-3 py-1 cursor-pointer active:scale-[0.95] rounded-[5px]"
+            <p className="text-white text-[24px] font-poppins font-semibold bg-violet px-3 py-1 cursor-pointer active:scale-[0.95] rounded-[5px]"
             >
               -
             </p>
