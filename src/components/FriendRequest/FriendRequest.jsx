@@ -28,6 +28,10 @@ const FriendRequest = () => {
 
     
   }, []);
+
+  const handleFriend = (item)=>{
+
+  }
   return (
     <div className="p-5 pt-0 rounded-[20px] shadow-custom mt-9 h-[445px] overflow-auto relative">
       <div className="flex justify-between mb-3 pt-5 bg-white sticky top-[0px] left-0 h-[70px] w-full">
@@ -44,6 +48,8 @@ const FriendRequest = () => {
                   key={idx}
                   image={items.senderPhoto}
                   name={items.senderName}
+                  items={items}
+                  handleFriend={handleFriend}
                 />
               )
           )}

@@ -1,7 +1,7 @@
 import React from 'react'
 import profile_pic from "../../assets/profile-pic.png";
 
-const FriendRequestComp = ({ image, name, message, }) => {
+const FriendRequestComp = ({ image, name, message, items, handleFriend }) => {
   return (
     <div className="pe-3 pb-4 mb-4 border-b-[1px] border-gray-400 border-opacity-80 flex gap-4 items-center last:border-none">
       <div className="rounded-full overflow-hidden w-[55px]">
@@ -17,7 +17,7 @@ const FriendRequestComp = ({ image, name, message, }) => {
           </h5>
         </div>
         <div className="text-center">
-          <p className="text-xl font-poppins font-semibold text-white cursor-pointer bg-violet px-5 py-1 rounded-[5px] active:scale-[0.95]">
+          <p onClick={()=>handleFriend(items)} className="text-xl font-poppins font-semibold text-white cursor-pointer bg-violet px-5 py-1 rounded-[5px] active:scale-[0.95]">
             Accept
           </p>
         </div>
