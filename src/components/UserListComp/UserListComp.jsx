@@ -2,8 +2,10 @@ import React from 'react'
 import profile_pic from "../../assets/profile-pic.png"
 import Skeleton from 'react-loading-skeleton';
 import "react-loading-skeleton/dist/skeleton.css";
+import { getAuth } from 'firebase/auth';
 
-const UserListComp = ({ image, name, friendRequest, reqSent, items,btn}) => {
+const UserListComp = ({ image, name, handleFriendRequest, friendRequestArr, items }) => {
+  const auth = getAuth();
   return (
     <div className="pe-3 pb-4 mb-4 border-b-[1px] border-gray-400 border-opacity-80 flex gap-4 items-center last:border-none">
       <div className="rounded-full overflow-hidden w-[55px]">
@@ -17,11 +19,22 @@ const UserListComp = ({ image, name, friendRequest, reqSent, items,btn}) => {
           </h5>
         </div>
         <div className="text-center">
-          <p onClick={()=>friendRequest(items)} className="text-white text-[24px] font-poppins font-semibold bg-violet px-3 py-1 cursor-pointer active:scale-[0.95] rounded-[5px]">
-            {btn}
-            
-            
-          </p>
+          {friendRequestArr.includes(auth.currentUser.email + items.email) ||
+          friendRequestArr.includes(items.email + auth.currentUser.email) ? (
+            <p
+              
+              className="text-white text-[24px] font-poppins font-semibold bg-violet px-3 py-1 cursor-pointer active:scale-[0.95] rounded-[5px]"
+            >
+              -
+            </p>
+          ) : (
+            <p
+              onClick={() => handleFriendRequest(items)}
+              className="text-white text-[24px] font-poppins font-semibold bg-violet px-3 py-1 cursor-pointer active:scale-[0.95] rounded-[5px]"
+            >
+              +
+            </p>
+          )}
         </div>
       </div>
     </div>

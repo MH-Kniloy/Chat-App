@@ -83,9 +83,10 @@ const UserList = () => {
                 key={idx}
                 image={items.profile_picture}
                 name={items.username}
-                friendRequest={handleFreindRequest}
+                handleFriendRequest={handleFreindRequest}
+                friendRequestArr={friendRequest}
                 items={items}
-                btn={"+"}
+                
               />
             ))
           )}
