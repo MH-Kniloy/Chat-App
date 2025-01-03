@@ -3,7 +3,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import FriendListComp from '../FriendListComp/FriendListComp';
 import { userInfo } from '../../context/UserContext/UserContext';
 import { getAuth } from 'firebase/auth';
-import { getDatabase, onValue, ref } from 'firebase/database';
+import { get, getDatabase, onValue, ref, remove } from 'firebase/database';
 
 const FriendList = () => {
   // const friendDetails =useContext(userInfo)
@@ -32,6 +32,25 @@ const FriendList = () => {
         
       }, []);
 
+       // for Unfriending friends 
+
+        const handleUnfriend = (items)=>{
+              let key = ""
+             get(ref(db, "friends/"))
+               .then((snapshot) => {
+                 snapshot.forEach((request) => {
+                   if (items.recieverEmail === request.val().recieverEmail) {
+                     
+                     key = request.key;
+                   }
+                 });
+               })
+               .then(() => {
+                 remove(ref(db, `friends/${key}`));
+               });
+           
+        }
+
   return (
     <div className="p-5 pt-0 rounded-[20px] shadow-custom h-[450px] overflow-auto relative">
       <div className="flex justify-between mb-3 pt-5 bg-white sticky top-[0px] left-0 h-[70px] w-full">
@@ -53,6 +72,8 @@ const FriendList = () => {
                   ? items.recieverName
                   : items.senderName
               }
+              handleUnfriend={handleUnfriend}
+              items={items}
             />
           ))}
         </div>
