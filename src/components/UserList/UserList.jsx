@@ -37,7 +37,7 @@ const UserList = () => {
     
   };
 
-  // for cancelling sent friend requst 
+  // for cancelling sent friend request 
   const handleCancelRequest = (items)=>{
         let key = ""
        get(ref(db, "friendRequest/"))
