@@ -10,6 +10,7 @@ const FriendList = () => {
    const auth = getAuth();
   const db = getDatabase();
   const [friendList, setFriendList] = useState([]);
+  const [noFriend, setNoFriend] = useState(false);
   // for friendList 
    useEffect(() => {
           onValue(ref(db, "friends/"), (snapshot) => {
@@ -22,6 +23,7 @@ const FriendList = () => {
            ){
 
              arr.push(friend.val());
+             setNoFriend(true)
            }
           });
           setFriendList(arr)
@@ -36,24 +38,29 @@ const FriendList = () => {
         <h3 className="font-poppins font-semibold text-xl">Friends</h3>
         <BsThreeDotsVertical className="text-2xl text-violet cursor-pointer " />
       </div>
-
-      <div>
-        {friendList.map((items, index) => (
-          <FriendListComp
-            key={index}
-            image={
-              auth.currentUser.email === items.senderEmail
-                ? items.recieverPhoto
-                : items.senderPhoto
-            }
-            name={
-              auth.currentUser.email === items.senderEmail
-                ? items.recieverName
-                : items.senderName
-            }
-          />
-        ))}
-      </div>
+      {noFriend ? (
+        <div>
+          {friendList.map((items, index) => (
+            <FriendListComp
+              key={index}
+              image={
+                auth.currentUser.email === items.senderEmail
+                  ? items.recieverPhoto
+                  : items.senderPhoto
+              }
+              name={
+                auth.currentUser.email === items.senderEmail
+                  ? items.recieverName
+                  : items.senderName
+              }
+            />
+          ))}
+        </div>
+      ) : (
+        <p className="font-opnesans text-2xl font-semibold text-center text-darkBlueOne">
+          You have no friends
+        </p>
+      )}
     </div>
   );
 }
