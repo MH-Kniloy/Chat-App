@@ -11,6 +11,7 @@ const UserListComp = ({
   friendRequestArr,
   friendListArr,
   items,
+  handleCancelRequest,
 }) => {
   const auth = getAuth();
   return (

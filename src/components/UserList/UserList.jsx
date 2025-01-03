@@ -38,8 +38,21 @@ const UserList = () => {
   };
 
   // for cancelling sent friend requst 
-  const handleCancelRequest = ()=>{
-    
+  const handleCancelRequest = (items)=>{
+        let key = ""
+       get(ref(db, "friendRequest/"))
+         .then((snapshot) => {
+           snapshot.forEach((request) => {
+             if (items.email === request.val().recieverEmail) {
+               // key.push(request.key)
+               key = request.key;
+             }
+           });
+         })
+         .then(() => {
+           remove(ref(db, `friendRequest/${key}`));
+         });
+     
   }
 
   // for userlist 
@@ -105,6 +118,7 @@ const UserList = () => {
                 image={items.profile_picture}
                 name={items.username}
                 handleFriendRequest={handleFreindRequest}
+                handleCancelRequest={handleCancelRequest}
                 friendRequestArr={friendRequest}
                 items={items}
                 friendListArr={friendList}
