@@ -1,4 +1,4 @@
-import React, { createRef, useEffect, useState } from "react";
+import React, { createRef, useContext, useEffect, useState } from "react";
 import profilePic from "../../assets/profile-pic.png";
 import { SlCloudUpload } from "react-icons/sl";
 import { GiCrossedSwords } from "react-icons/gi";
@@ -14,17 +14,18 @@ import { getAuth, signOut } from "firebase/auth";
 import { useSelector } from "react-redux";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
+import { alertContext } from "../../context/NotificationContext/NotificationContext";
 
 const SidebarMenu = () => {
   const user = useSelector((user) => user.userDetails.userCredentials);
   const auth = getAuth();
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
-  const alert = JSON.parse(localStorage.getItem("alert"));
-  console.log(alert, 'nive')
+  const alert = useContext(alertContext)
+
   const removeAlert = ()=>{
-    localStorage.setItem("alert", JSON.stringify(false))
-    console.log("nice")
+   alert.setAlert(false);
+   
     
   }
   const handleUpload = () => {
@@ -132,12 +133,12 @@ const SidebarMenu = () => {
                 <IoIosNotificationsOutline className="  md:text-[60px] text-[30px]  cursor-pointer" />
                 <p
                   className={`bg-red-500 w-4 h-4 rounded-full animate-ping absolute top-[10px] right-[10px] ${
-                    alert ? "opacity-100" : "opacity-0"
+                    alert.alert ? "opacity-100" : "opacity-0"
                   } `}
                 ></p>
                 <p
                   className={`bg-red-500 w-4 h-4 rounded-full absolute top-[10px] right-[10px] ${
-                    alert ? "opacity-100" : "opacity-0"
+                    alert.alert ? "opacity-100" : "opacity-0"
                   } `}
                 ></p>
               </div>

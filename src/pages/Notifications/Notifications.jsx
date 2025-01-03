@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Container from "../../components/Container/Container";
 import SidebarMenu from "../../components/SidebarMenu/SidebarMenu";
 import profilePic from "../../assets/profile-pic.png";
@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getDatabase, onValue, ref } from "firebase/database";
 import { getAuth } from "firebase/auth";
+import { alertContext } from "../../context/NotificationContext/NotificationContext";
 const Notifications = () => {
    const reduxData = useSelector((state) => state.userDetails.userCredentials);
     const navigate = useNavigate();
@@ -13,9 +14,7 @@ const Notifications = () => {
       const db = getDatabase();
       const [notifications, setNotifications]=useState([])
       const [absentNotifications, setAbsentNotifications]=useState(false)
-      const [alert, setAlert]=useState(false)
-      console.log(notifications)
-      localStorage.setItem("alert", JSON.stringify(alert));
+       const alert = useContext(alertContext);
     useEffect(() => {
       if (!reduxData) {
         navigate("/Login");
@@ -27,7 +26,7 @@ const Notifications = () => {
               if(auth.currentUser.email===request.val().recieverEmail){
                 arr.push(request.val())
                 setAbsentNotifications(true)
-                setAlert(true)
+                alert.setAlert(true);
               } 
             })
             setNotifications(arr)
