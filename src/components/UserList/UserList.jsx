@@ -37,6 +37,11 @@ const UserList = () => {
     
   };
 
+  // for cancelling sent friend requst 
+  const handleCancelRequest = ()=>{
+    
+  }
+
   // for userlist 
   useEffect(() => {
     setLoading(true);

@@ -1,10 +1,17 @@
-import React from 'react'
-import profile_pic from "../../assets/profile-pic.png"
-import Skeleton from 'react-loading-skeleton';
+import React from "react";
+import profile_pic from "../../assets/profile-pic.png";
+import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { getAuth } from 'firebase/auth';
+import { getAuth } from "firebase/auth";
 
-const UserListComp = ({ image, name, handleFriendRequest, friendRequestArr, friendListArr, items }) => {
+const UserListComp = ({
+  image,
+  name,
+  handleFriendRequest,
+  friendRequestArr,
+  friendListArr,
+  items,
+}) => {
   const auth = getAuth();
   return (
     <div className="pe-3 pb-4 mb-4 border-b-[1px] border-gray-400 border-opacity-80 flex gap-4 items-center last:border-none">
@@ -19,19 +26,25 @@ const UserListComp = ({ image, name, handleFriendRequest, friendRequestArr, frie
           </h5>
         </div>
         <div className="text-center">
-          {
-          friendListArr.includes(auth.currentUser.email + items.email) ||
-          friendListArr.includes(items.email + auth.currentUser.email) ?
-          <p className="text-white text-[20px] font-poppins font-medium bg-violet px-3 py-1 rounded-[5px]"
-            >
+          {friendListArr.includes(auth.currentUser.email + items.email) ||
+          friendListArr.includes(items.email + auth.currentUser.email) ? (
+            <p className="text-white text-[20px] font-poppins font-medium bg-violet px-3 py-1 rounded-[5px]">
               Friends
             </p>
-            :
-          friendRequestArr.includes(auth.currentUser.email + items.email) ||
-          friendRequestArr.includes(items.email + auth.currentUser.email) ? (
-            <p className="text-white text-[24px] font-poppins font-semibold bg-violet px-3 py-1 cursor-pointer active:scale-[0.95] rounded-[5px]"
+          ) : friendRequestArr.includes(
+              items.email + auth.currentUser.email
+            ) ? (
+            <p
+              onClick={() => handleCancelRequest(items)}
+              className="text-white text-[18px] font-poppins font-medium bg-orange px-3 py-1 cursor-pointer active:scale-[0.95] rounded-[5px]"
             >
-              -
+              Cancel request
+            </p>
+          ) : friendRequestArr.includes(
+              auth.currentUser.email + items.email
+            ) ? (
+            <p className="text-white text-[18px] font-poppins font-medium bg-violet px-3 py-1 rounded-[5px]">
+              Request received
             </p>
           ) : (
             <p
@@ -47,4 +60,4 @@ const UserListComp = ({ image, name, handleFriendRequest, friendRequestArr, frie
   );
 };
 
-export default UserListComp
+export default UserListComp;
