@@ -22,7 +22,7 @@ const FriendList = () => {
              friend.val().recieverEmail === auth.currentUser.email
            ){
 
-             arr.push(friend.val());
+             arr.push({...friend.val(), key:friend.key});
              setNoFriend(true)
            }
           });
@@ -59,20 +59,27 @@ const FriendList = () => {
             set(push(ref(db, "block/")),{
               blockedEmail:items.senderEmail,
               blockedName:items.senderName,
-              blockedPhoto:items.senderPhoto,
+              blockedPhoto:items.senderPhoto?items.senderPhoto:"",
               blockedByEmail:items.recieverEmail,
               blockedByName:items.recieverName,
-              blockedByPhoto:items.recieverPhoto,
+              blockedByPhoto:items.recieverPhoto?items.recieverPhoto:"",
               
-            });
+            })
+            .then(()=>{
+              remove(ref(db, `friends/${items.key}`))
+              
+            })
           }else{
               set(push(ref(db, "block/")), {
                 blockedEmail: items.recieverEmail,
                 blockedName: items.recieverName,
-                blockedPhoto: items.recieverPhoto,
+                blockedPhoto: items.recieverPhoto ? items.recieverPhoto : "",
                 blockedByEmail: items.senderEmail,
                 blockedByName: items.senderName,
-                blockedByPhoto: items.senderPhoto,
+                blockedByPhoto: items.senderPhoto ? items.senderPhoto : "",
+              })
+              .then(() => {
+                remove(ref(db, `friends/${items.key}`));
               });
           }
         }
