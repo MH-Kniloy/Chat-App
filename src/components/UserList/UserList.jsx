@@ -24,7 +24,7 @@ const UserList = () => {
   const [friendRequest, setFriendrequest] = useState([]);
   const [friendList, setFriendList] = useState([]);
   const [blockList, setBlockList] = useState([]);
-  console.log(blockList)
+  
   // for sending friend request 
   const handleFreindRequest = (items) => {
 
