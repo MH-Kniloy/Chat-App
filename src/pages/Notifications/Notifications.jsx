@@ -14,7 +14,7 @@ const Notifications = () => {
       const db = getDatabase();
       const [notifications, setNotifications]=useState([])
       const [absentNotifications, setAbsentNotifications]=useState(false)
-       const alert = useContext(alertContext);
+      //  const alert = useContext(alertContext);
     useEffect(() => {
       if (!reduxData) {
         navigate("/Login");
@@ -26,7 +26,7 @@ const Notifications = () => {
               if(auth.currentUser.email===request.val().recieverEmail){
                 arr.push(request.val())
                 setAbsentNotifications(true)
-                alert.setAlert(true);
+                
               } 
             })
             setNotifications(arr)

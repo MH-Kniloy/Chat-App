@@ -4,6 +4,7 @@ import FriendRequestComp from "../FriendRequestComp/FriendRequestComp";
 import { userInfo } from "../../context/UserContext/UserContext";
 import { getDatabase, ref, onValue, set, push, remove, get,} from "firebase/database";
 import { getAuth } from "firebase/auth";
+import { alertContext } from "../../context/NotificationContext/NotificationContext";
 
 const FriendRequest = () => {
   const requestDetails = useContext(userInfo);
@@ -14,6 +15,7 @@ const FriendRequest = () => {
   const dataRef = ref(db, "friendRequest/");
   const [friendRequest, setFriendrequest] = useState([]);
   const [noRequest, setNoRequest] = useState(false);
+  const alert = useContext(alertContext);
   useEffect(() => {
       onValue(dataRef, (snapshot) => {
       let arr = []
@@ -22,6 +24,7 @@ const FriendRequest = () => {
           arr.push({...request.val(), userId:request.key})
           setNoRequest(true)
         }
+        alert.setAlert(true);
       })
       setFriendrequest(arr)
       });
