@@ -3,7 +3,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import FriendListComp from '../FriendListComp/FriendListComp';
 import { userInfo } from '../../context/UserContext/UserContext';
 import { getAuth } from 'firebase/auth';
-import { get, getDatabase, onValue, ref, remove } from 'firebase/database';
+import { get, getDatabase, onValue, push, ref, remove, set } from 'firebase/database';
 
 const FriendList = () => {
   // const friendDetails =useContext(userInfo)
@@ -53,8 +53,28 @@ const FriendList = () => {
 
         // for blocking friends 
 
-        const handleBlock = ()=>{
-
+        const handleBlock = (items)=>{
+          console.log(items)
+          if(auth.currentUser.email===items.recieverEmail){
+            set(push(ref(db, "block/")),{
+              blockedEmail:items.senderEmail,
+              blockedName:items.senderName,
+              blockedPhoto:items.senderPhoto,
+              blockedByEmail:items.recieverEmail,
+              blockedByName:items.recieverName,
+              blockedByPhoto:items.recieverPhoto,
+              
+            });
+          }else{
+              set(push(ref(db, "block/")), {
+                blockedEmail: items.recieverEmail,
+                blockedName: items.recieverName,
+                blockedPhoto: items.recieverPhoto,
+                blockedByEmail: items.senderEmail,
+                blockedByName: items.senderName,
+                blockedByPhoto: items.senderPhoto,
+              });
+          }
         }
 
   return (
