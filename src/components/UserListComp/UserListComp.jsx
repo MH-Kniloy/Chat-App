@@ -10,10 +10,13 @@ const UserListComp = ({
   handleFriendRequest,
   friendRequestArr,
   friendListArr,
+  blockListArr,
   items,
   handleCancelRequest,
 }) => {
   const auth = getAuth();
+  console.log(items)
+  console.log(blockListArr)
   return (
     <div className="pe-3 pb-4 mb-4 border-b-[1px] border-gray-400 border-opacity-80 flex gap-4 items-center last:border-none">
       <div className="rounded-full overflow-hidden w-[55px]">
@@ -27,8 +30,13 @@ const UserListComp = ({
           </h5>
         </div>
         <div className="text-center">
-          {friendListArr.includes(auth.currentUser.email + items.email) ||
-          friendListArr.includes(items.email + auth.currentUser.email) ? (
+          {blockListArr.includes(auth.currentUser.email + items.email) ||
+          blockListArr.includes(items.email + auth.currentUser.email) ? (
+            <p className="text-white text-[20px] font-poppins font-medium bg-violet px-3 py-1 rounded-[5px]">
+              Blocked
+            </p>
+          ) : friendListArr.includes(auth.currentUser.email + items.email) ||
+            friendListArr.includes(items.email + auth.currentUser.email) ? (
             <p className="text-white text-[20px] font-poppins font-medium bg-violet px-3 py-1 rounded-[5px]">
               Friends
             </p>

@@ -13,7 +13,7 @@ const BlockedUsers = () => {
     const db = getDatabase();
     const [blockList, setBlockList] = useState([]);
     const [noBlock, setNoBlock] = useState(false);
-
+    console.log(blockList)
     // for blockList 
 
      useEffect(() => {

@@ -23,6 +23,8 @@ const UserList = () => {
   const [loading, setLoading] = useState(false);
   const [friendRequest, setFriendrequest] = useState([]);
   const [friendList, setFriendList] = useState([]);
+  const [blockList, setBlockList] = useState([]);
+  console.log(blockList)
   // for sending friend request 
   const handleFreindRequest = (items) => {
 
@@ -101,6 +103,21 @@ const UserList = () => {
       
     }, []);
 
+      // for blockList 
+    
+         useEffect(() => {
+                onValue(ref(db, "block/"), (snapshot) => {
+                let arr = []
+                
+                snapshot.forEach((block) => {
+                 arr.push(block.val().blockedEmail+block.val().blockedByEmail)
+                });
+                setBlockList(arr);
+              });
+          
+              
+            }, []);
+
   return (
     <div className="p-5 pt-0 rounded-[20px] shadow-custom h-[450px] overflow-auto relative ">
       <div className="flex justify-between mb-3 pt-5 bg-white sticky top-[0px] left-0 h-[70px] w-full">
@@ -122,6 +139,7 @@ const UserList = () => {
                 friendRequestArr={friendRequest}
                 items={items}
                 friendListArr={friendList}
+                blockListArr={blockList}
               />
             ))
           )}
