@@ -24,13 +24,15 @@ const FriendRequest = () => {
           arr.push({...request.val(), userId:request.key})
           setNoRequest(true)
         }
-        alert.setAlert(true);
+        
       })
       setFriendrequest(arr)
       });
 
     
   }, []);
+
+
 
   // for accepting friend request 
 
@@ -60,6 +62,16 @@ const FriendRequest = () => {
            });
        
     }
+
+    get(ref(db, "friendRequest/"))
+      .then((snapshot) => {
+        snapshot.forEach((request) => {
+          if (auth.currentUser.email === request.val().recieverEmail) {
+            alert.setAlert(true);
+          }
+        });
+      })
+      
 
   return (
     <div className="p-5 pt-0 rounded-[20px] shadow-custom mt-9 h-[445px] overflow-auto relative">

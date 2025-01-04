@@ -51,6 +51,12 @@ const FriendList = () => {
            
         }
 
+        // for blocking friends 
+
+        const handleBlock = ()=>{
+
+        }
+
   return (
     <div className="p-5 pt-0 rounded-[20px] shadow-custom h-[450px] overflow-auto relative">
       <div className="flex justify-between mb-3 pt-5 bg-white sticky top-[0px] left-0 h-[70px] w-full">
@@ -74,6 +80,7 @@ const FriendList = () => {
               }
               handleUnfriend={handleUnfriend}
               items={items}
+              handleBlock={handleBlock}
             />
           ))}
         </div>

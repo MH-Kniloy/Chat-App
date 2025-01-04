@@ -24,10 +24,9 @@ const SidebarMenu = () => {
   const alert = useContext(alertContext)
 
   const removeAlert = ()=>{
-   alert.setAlert(false);
-   
-    
+   alert.setAlert(false);  
   }
+  
   const handleUpload = () => {
     setShow(true);
   };
