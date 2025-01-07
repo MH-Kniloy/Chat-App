@@ -15,6 +15,7 @@ const Notifications = () => {
       const [notifications, setNotifications]=useState([])
       const [absentNotifications, setAbsentNotifications]=useState(false)
       //  const alert = useContext(alertContext);
+      console.log(notifications.length)
     useEffect(() => {
       if (!reduxData) {
         navigate("/Login");
@@ -26,14 +27,14 @@ const Notifications = () => {
               if(auth.currentUser.email===request.val().recieverEmail){
                 arr.push(request.val())
                 setAbsentNotifications(true)
-                
+              
               } 
             })
             setNotifications(arr)
             
           });
-      
-    },[]);
+          
+        },[]);
   return (
     <Container>
       <section className="mt-14 md:mt-0">
@@ -48,7 +49,11 @@ const Notifications = () => {
               notifications.map((notification) => (
                 <h3 className="flex justify-center items-center gap-3 w-[90%] rounded-[15px] bg-slate-200 py-6 text-2xl text-darkBlueOne font-opnesans font-semibold text-center mb-6">
                   You have received a friend request from
-                  <img className="w-[55px] h-[55px] rounded-full" src={notification.senderPhoto || profilePic} alt="" />
+                  <img
+                    className="w-[55px] h-[55px] rounded-full"
+                    src={notification.senderPhoto || profilePic}
+                    alt=""
+                  />
                   <span className="text-orange">{notification.senderName}</span>
                 </h3>
               ))

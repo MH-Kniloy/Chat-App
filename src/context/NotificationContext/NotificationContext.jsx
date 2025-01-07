@@ -2,7 +2,7 @@ import React, { createContext, useState } from 'react'
 
 let alertContext = createContext()
 const NotificationContext = ({children}) => {
-    const [alert, setAlert]=useState(false)
+    const [alert, setAlert]=useState(true)
   return (
     <div>
         <alertContext.Provider value={{alert, setAlert}}>

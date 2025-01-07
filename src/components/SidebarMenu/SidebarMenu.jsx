@@ -15,22 +15,20 @@ import { useSelector } from "react-redux";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 import { alertContext } from "../../context/NotificationContext/NotificationContext";
+import { getDatabase, onValue, ref, remove } from "firebase/database";
 
 const SidebarMenu = () => {
+  const [notifications, setNotifications]=useState([])
+  const [alert, setAlert]=useState(true)
   const user = useSelector((user) => user.userDetails.userCredentials);
   const auth = getAuth();
+  const db = getDatabase();
   const navigate = useNavigate();
-  const [show, setShow] = useState(false);
-  const alert = useContext(alertContext)
-
-  const removeAlert = ()=>{
-   alert.setAlert(false);  
-  }
-  
+  const [show, setShow] = useState(false)
   const handleUpload = () => {
     setShow(true);
   };
-
+  
   const [image, setImage] = useState();
   const [cropData, setCropData] = useState("");
   const cropperRef = createRef();
@@ -49,6 +47,22 @@ const SidebarMenu = () => {
     };
     reader.readAsDataURL(files[0]);
   };
+
+   useEffect(() => {
+  
+        onValue(ref(db, "friendRequest/"), (snapshot) => {
+              let arr = []
+              snapshot.forEach((request)=>{
+                if(auth.currentUser.email===request.val().recieverEmail){
+                  arr.push(request.val())
+                
+                } 
+              })
+              setNotifications(arr)
+              
+            });
+            
+          },[]);
   return (
     <div className="md:w-[10%] w-full bg-violet md:h-[960px] h-[80px] md:rounded-[20px] md:flex justify-center md:me-[45px] md:static fixed top-0 left-0 z-10">
       <ToastContainer
@@ -128,18 +142,23 @@ const SidebarMenu = () => {
                   : "text-white md:p-5 p-2 rounded-full"
               }
             >
-              <div onClick={removeAlert} className="relative">
+              <div onClick={() => setAlert(false)} className="relative">
                 <IoIosNotificationsOutline className="  md:text-[60px] text-[30px]  cursor-pointer" />
-                <p
-                  className={`bg-red-500 w-4 h-4 rounded-full animate-ping absolute top-[10px] right-[10px] ${
-                    alert.alert ? "opacity-100" : "opacity-0"
-                  } `}
-                ></p>
-                <p
-                  className={`bg-red-500 w-4 h-4 rounded-full absolute top-[10px] right-[10px] ${
-                    alert.alert ? "opacity-100" : "opacity-0"
-                  } `}
-                ></p>
+                {
+                alert &&
+                notifications.length > 0 ?
+                
+                <div>
+                  <p
+                    className={`bg-red-500 w-4 h-4 rounded-full animate-ping absolute top-[10px] right-[10px] `}
+                  ></p>
+                  <p
+                    className={`bg-red-500 w-4 h-4 rounded-full absolute top-[10px] right-[10px] `}
+                  ></p>
+                </div>
+                :
+                ""
+                }
               </div>
             </NavLink>
           </li>
