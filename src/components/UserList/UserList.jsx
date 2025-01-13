@@ -156,6 +156,22 @@ const UserList = () => {
           {loading ? (
             <Skeleton count={10} />
           ) : (
+            searchData.length>0
+            ?
+            searchData.map((items, idx)=>(
+              <UserListComp
+                key={idx}
+                image={items.profile_picture}
+                name={items.username}
+                handleFriendRequest={handleFreindRequest}
+                handleCancelRequest={handleCancelRequest}
+                friendRequestArr={friendRequest}
+                items={items}
+                friendListArr={friendList}
+                blockListArr={blockList}
+              />
+            ))
+            :
             userLists.map((items, idx) => (
               <UserListComp
                 key={idx}
