@@ -15,7 +15,7 @@ import {
   off,
 } from "firebase/database";
 import { getAuth } from "firebase/auth";
-import SearchBar from './../SearchBar/SearchBar';
+import SearchBar from "./../SearchBar/SearchBar";
 const UserList = () => {
   // const userDetails = useContext(userInfo);
   const auth = getAuth();
@@ -25,11 +25,11 @@ const UserList = () => {
   const [friendRequest, setFriendrequest] = useState([]);
   const [friendList, setFriendList] = useState([]);
   const [blockList, setBlockList] = useState([]);
-  const [searchData, setSearchData] = useState([])
-  
-  // for sending friend request 
-  const handleFreindRequest = (items) => {
+  const [searchData, setSearchData] = useState([]);
+  const [emptySearch, setEmptySearch] = useState("");
 
+  // for sending friend request
+  const handleFreindRequest = (items) => {
     set(push(ref(db, "friendRequest/")), {
       senderName: auth.currentUser.displayName,
       senderEmail: auth.currentUser.email,
@@ -37,29 +37,27 @@ const UserList = () => {
       recieverName: items.username,
       recieverEmail: items.email,
       recieverPhoto: items.profile_picture,
-    })
-    
+    });
   };
 
-  // for cancelling sent friend request 
-  const handleCancelRequest = (items)=>{
-        let key = ""
-       get(ref(db, "friendRequest/"))
-         .then((snapshot) => {
-           snapshot.forEach((request) => {
-             if (items.email === request.val().recieverEmail) {
-               // key.push(request.key)
-               key = request.key;
-             }
-           });
-         })
-         .then(() => {
-           remove(ref(db, `friendRequest/${key}`));
-         });
-     
-  }
+  // for cancelling sent friend request
+  const handleCancelRequest = (items) => {
+    let key = "";
+    get(ref(db, "friendRequest/"))
+      .then((snapshot) => {
+        snapshot.forEach((request) => {
+          if (items.email === request.val().recieverEmail) {
+            // key.push(request.key)
+            key = request.key;
+          }
+        });
+      })
+      .then(() => {
+        remove(ref(db, `friendRequest/${key}`));
+      });
+  };
 
-  // for userlist 
+  // for userlist
   useEffect(() => {
     setLoading(true);
 
@@ -73,92 +71,98 @@ const UserList = () => {
       setuserLists(arr);
       setLoading(false);
     });
-
   }, []);
 
-  // for concating sender receiver email and determining what happens after that 
-    useEffect(() => {
-        onValue(ref(db, "friendRequest/"), (snapshot) => {
-        let arr = []
-        snapshot.forEach((request)=>{
-          
-          arr.push(request.val().recieverEmail+request.val().senderEmail)
-        })
-        setFriendrequest(arr)
-        });
-  
-      
-    }, []);
+  // for concating sender receiver email and determining what happens after that
+  useEffect(() => {
+    onValue(ref(db, "friendRequest/"), (snapshot) => {
+      let arr = [];
+      snapshot.forEach((request) => {
+        arr.push(request.val().recieverEmail + request.val().senderEmail);
+      });
+      setFriendrequest(arr);
+    });
+  }, []);
 
-    // for friendList 
+  // for friendList
 
-    useEffect(() => {
-        onValue(ref(db, "friends/"), (snapshot) => {
-        let arr = []
-        snapshot.forEach((friend)=>{
-          
-          arr.push(friend.val().recieverEmail+friend.val().senderEmail)
-        })
-        setFriendList(arr)
-        });
-  
-      
-    }, []);
+  useEffect(() => {
+    onValue(ref(db, "friends/"), (snapshot) => {
+      let arr = [];
+      snapshot.forEach((friend) => {
+        arr.push(friend.val().recieverEmail + friend.val().senderEmail);
+      });
+      setFriendList(arr);
+    });
+  }, []);
 
-      // for blockList 
-    
-         useEffect(() => {
-                onValue(ref(db, "block/"), (snapshot) => {
-                let arr = []
-                
-                snapshot.forEach((block) => {
-                 arr.push(block.val().blockedEmail+block.val().blockedByEmail)
-                });
-                setBlockList(arr);
-              });
-          
-              
-            }, []);
-           
-            // for searching user 
+  // for blockList
 
-            const handleSearch = (e)=>{
-              let arr = []
-              userLists.filter((user)=>{
-                if (
-                  user.username
-                    .toLowerCase()
-                    .includes(e.target.value.toLowerCase())
-                ) {
-                    arr.push(user)
-                    setSearchData(arr)
-                }
-                
-              })
-              
-            }
-  
+  useEffect(() => {
+    onValue(ref(db, "block/"), (snapshot) => {
+      let arr = [];
+
+      snapshot.forEach((block) => {
+        arr.push(block.val().blockedEmail + block.val().blockedByEmail);
+      });
+      setBlockList(arr);
+    });
+  }, []);
+
+  // for searching user
+
+  // const handleSearch = (e) => {
+  //   let arr = [];
+  //   setEmptySearch(e.target.value.toLowerCase())
+  //   if(e.target.value === ""){
+  //     setSearchData([])
+  //   }else{
+
+  //     userLists.filter((user) => {
+  //       if (user.username.toLowerCase().includes(e.target.value.toLowerCase())) {
+  //         arr.push(user);
+  //         setSearchData(arr);
+  //       }else{
+  //         setSearchData([])
+  //       }
+  //     });
+  //   }
+  // };
+  const handleSearch = (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    setEmptySearch(searchTerm);
+
+    if (!searchTerm) {
+      setSearchData([]);
+      return;
+    }
+
+    const filteredData = userLists.filter((user) =>
+      user.username.toLowerCase().includes(searchTerm)
+    );
+    setSearchData(filteredData);
+  };
+
   return (
     <div className="p-5 pt-0 rounded-[20px] shadow-custom h-[450px] overflow-auto relative ">
-      
-
       <div className="flex flex-col justify-between mb-5 pt-5 pb-4 bg-white sticky top-[0px] left-0 h-[130px] w-full">
-        <div className="flex justify-between"> 
-
-        <h3 className="font-poppins font-semibold text-xl ">User List</h3>
-        <BsThreeDotsVertical className="text-2xl text-violet cursor-pointer " />
+        <div className="flex justify-between">
+          <h3 className="font-poppins font-semibold text-xl ">User List</h3>
+          <BsThreeDotsVertical className="text-2xl text-violet cursor-pointer " />
         </div>
-      <SearchBar handleSearch={handleSearch}/>
+        <SearchBar handleSearch={handleSearch} />
       </div>
-      
+
       {
         <div>
           {loading ? (
             <Skeleton count={10} />
-          ) : (
-            searchData.length>0
-            ?
-            searchData.map((items, idx)=>(
+          ) : emptySearch && searchData.length === 0 ? (
+            <p className="font-opnesans text-2xl font-semibold text-center text-darkBlueOne">
+               No user found
+            </p>
+          ) : searchData.length > 0 ? (
+            searchData.map((items, idx) => (
               <UserListComp
                 key={idx}
                 image={items.profile_picture}
@@ -171,7 +175,7 @@ const UserList = () => {
                 blockListArr={blockList}
               />
             ))
-            :
+          ) : (
             userLists.map((items, idx) => (
               <UserListComp
                 key={idx}
