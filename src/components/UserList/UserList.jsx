@@ -25,6 +25,7 @@ const UserList = () => {
   const [friendRequest, setFriendrequest] = useState([]);
   const [friendList, setFriendList] = useState([]);
   const [blockList, setBlockList] = useState([]);
+  const [searchData, setSearchData] = useState([])
   
   // for sending friend request 
   const handleFreindRequest = (items) => {
@@ -118,7 +119,25 @@ const UserList = () => {
           
               
             }, []);
+           
+            // for searching user 
 
+            const handleSearch = (e)=>{
+              let arr = []
+              userLists.filter((user)=>{
+                if (
+                  user.username
+                    .toLowerCase()
+                    .includes(e.target.value.toLowerCase())
+                ) {
+                    arr.push(user)
+                    setSearchData(arr)
+                }
+                
+              })
+              
+            }
+  
   return (
     <div className="p-5 pt-0 rounded-[20px] shadow-custom h-[450px] overflow-auto relative ">
       
@@ -129,7 +148,7 @@ const UserList = () => {
         <h3 className="font-poppins font-semibold text-xl ">User List</h3>
         <BsThreeDotsVertical className="text-2xl text-violet cursor-pointer " />
         </div>
-      <SearchBar/>
+      <SearchBar handleSearch={handleSearch}/>
       </div>
       
       {
