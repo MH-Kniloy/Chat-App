@@ -7,15 +7,12 @@ import { getAuth } from "firebase/auth";
 import { alertContext } from "../../context/NotificationContext/NotificationContext";
 
 const FriendRequest = () => {
-  const requestDetails = useContext(userInfo);
-  const slice = requestDetails.slice(0, 4);
-
+ 
   const auth = getAuth();
   const db = getDatabase();
   const dataRef = ref(db, "friendRequest/");
   const [friendRequest, setFriendrequest] = useState([]);
   const [noRequest, setNoRequest] = useState(false);
-  const alert = useContext(alertContext);
   useEffect(() => {
       onValue(dataRef, (snapshot) => {
       let arr = []
@@ -63,14 +60,7 @@ const FriendRequest = () => {
        
     }
 
-    get(ref(db, "friendRequest/"))
-      .then((snapshot) => {
-        snapshot.forEach((request) => {
-          if (auth.currentUser.email === request.val().recieverEmail) {
-            alert.setAlert(true);
-          }
-        });
-      })
+   
       
 
   return (

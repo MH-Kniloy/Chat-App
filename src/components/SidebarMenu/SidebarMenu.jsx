@@ -18,7 +18,7 @@ import { alertContext } from "../../context/NotificationContext/NotificationCont
 import { getDatabase, onValue, ref, remove } from "firebase/database";
 
 const SidebarMenu = () => {
-  const [notifications, setNotifications]=useState([])
+  const [notification, setNotification]=useState([])
   const [alert, setAlert]=useState(true)
   const user = useSelector((user) => user.userDetails.userCredentials);
   const auth = getAuth();
@@ -58,7 +58,7 @@ const SidebarMenu = () => {
                 
                 } 
               })
-              setNotifications(arr)
+              setNotification(arr)
               
             });
             
@@ -146,7 +146,7 @@ const SidebarMenu = () => {
                 <IoIosNotificationsOutline className="  md:text-[60px] text-[30px]  cursor-pointer" />
                 {
                 alert &&
-                notifications.length > 0 ?
+                notification.length > 0 ?
                 
                 <div>
                   <p
